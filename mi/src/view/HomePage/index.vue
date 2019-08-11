@@ -1,11 +1,10 @@
 <template>
     <div id="app">
-
-        <Header></Header>
+            <Header></Header>
         <main>
-            
+            <router-view></router-view>
+            <div class="side"></div>
         </main>
-        <router-view></router-view>
         
           <footer>
             <div>
@@ -38,11 +37,10 @@
 
 <script>
 import Header from "../common/Header";
-// import Footer from "../common/Footer"
+
 export default {
     components:{
         Header,
-        // Footer
     }
 }
 </script>
@@ -75,6 +73,10 @@ export default {
          main{
             flex: 1;
             overflow-y: scroll;
+            background: red;
+            .side{
+                height: 50rem;
+            }
         }
          footer{
             width: 100%;
