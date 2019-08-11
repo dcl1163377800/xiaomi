@@ -6,7 +6,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import Index from "./view/HomePage/index.vue"
+// import Index from "./view/HomePage/index.vue"
 
 
 
@@ -14,7 +14,6 @@ export default {
   name: 'app',
   components: {
     HelloWorld,
-    Index
   }
 }
 </script>
