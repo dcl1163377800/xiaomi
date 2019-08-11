@@ -54,21 +54,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    :root {
-overflow-y: auto;
-overflow-x: hidden;
-}
-:root body {
-position: absolute;
-}
-body {
-width: 100vw;
-overflow: hidden;
-}
     html {
         overflow-y: scroll;
-    font-size: -webkit-calc(100vw/7.5);
-    font-size: calc(100vw / 7.5);
+        font-size: -webkit-calc(100vw/7.5);
+        font-size: calc(100vw / 7.5);
     }
     * {
     margin: 0;
