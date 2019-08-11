@@ -1,7 +1,7 @@
 <template>
     <div>
-        首页
-        <div class="menu"></div>
+        
+        
     </div>
 </template>
 
@@ -12,7 +12,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .menu{
-        height: 50rem;
-    }
+    
 </style>

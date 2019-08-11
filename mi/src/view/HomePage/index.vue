@@ -12,6 +12,7 @@
         </header>
         <main>
             <router-view></router-view>
+            <Tabber></Tabber>
         </main>
         
           <footer>
@@ -44,29 +45,18 @@
 </template>
 
 <script>
-// import Header from "../common/Header";
+import Tabber from "../../components/tabbar"
 
 export default {
     components:{
-        // Header,
+        Tabber
     }
 }
 </script>
 
 <style lang="scss" scoped>
-    :root {
-overflow-y: auto;
-overflow-x: hidden;
-}
-:root body {
-position: absolute;
-}
-body {
-width: 100vw;
-overflow: hidden;
-}
+
     html {
-        overflow-y: scroll;
     font-size: -webkit-calc(100vw/7.5);
     font-size: calc(100vw / 7.5);
     }
@@ -75,15 +65,7 @@ overflow: hidden;
     padding: 0;
     box-sizing: border-box;
     }
-    li {
-    list-style: none;
-    }
-    img {
-    vertical-align: top;
-    }
-    a {
-    text-decoration: none;
-    }
+   
     #app {
     width: 100vw;
     height: 100vh;
@@ -92,12 +74,13 @@ overflow: hidden;
     flex-direction: column;
         header{
             width: 100%;
-            height: 3rem;
+            height: 2rem;
+            background: #f2f2f2;
               .logo_header{
                 width: 100%;
                 height: 3rem;
                 text-align: center;
-                background: #f2f2f2;
+                
                 color: gray;
                 display: flex;
                 justify-content: space-around;
@@ -115,17 +98,16 @@ overflow: hidden;
                         input{
                             color:rgba(0,0,0,.3);
                             border: 0;
-                            width: 6rem;
+                            width: 13rem;
                             height: 1.5rem;
                             padding:0.2rem
                         }
                     }
-        }
+                }
         }
          main{
             flex: 1;
             overflow-y: scroll;
-            background: red;
         }
          footer{
             width: 100%;
