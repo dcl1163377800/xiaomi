@@ -34,7 +34,7 @@
                 </div> 
               </div>
             </div>
-            <div class="watch2">
+            <div class="watch2" @click="buy">
               <div class="watch_list" v-for="item of watchList" :key="item.w_id"> 
                 <div class="w1">
                   <img :src="item.w_img" alt="">
@@ -46,7 +46,7 @@
                     <span class="new_price">{{item.new_price}}</span>
                     <span class="old_price">{{item.old_price}}</span>
                   </p>
-                  <button class="buy" @click="buy">立即购买</button>
+                  <button class="buy">立即购买</button>
                 </div>              
               </div>
             </div>

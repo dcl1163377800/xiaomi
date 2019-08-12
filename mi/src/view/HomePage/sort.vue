@@ -8,17 +8,7 @@
         <div class="nav">
             <div class="left_menu">
                 <ul>
-                    <li class="active" >新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
+                    <li class="active">新品</li>
                     <li>新品</li>
                     <li>新品</li>
                 </ul>
@@ -32,7 +22,7 @@
 export default {
     data(){
         return{
-
+           
         }
     },
     mothods:{
