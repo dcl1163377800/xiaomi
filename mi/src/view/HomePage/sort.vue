@@ -11,6 +11,28 @@
                     <li class="active">新品</li>
                     <li>新品</li>
                     <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li><li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li><li>新品</li>
+                    <li>新品</li>
+
                 </ul>
             </div>
             <div class="right_content"></div>
@@ -52,7 +74,6 @@ export default {
     }
 
         .nav{
-            height: 50rem;
             background: #fefefe;
             .left_menu{
                 position:fixed;
@@ -61,10 +82,15 @@ export default {
                 left:0;
                 width:5rem;
                 border-right: 1px solid #efefef;
-                overflow: hidden;
+                // overflow: hidden;
+                overflow-y: scroll; 
+                overflow-x: hidden;
                 ul{
                     padding:0.2rem 0.4rem 0.3rem 0;
-                    overflow-y: scroll;              
+                    overflow-y: scroll; 
+                    // top: 1rem;
+                    // bottom: 1rem;
+                    // position: fixed;             
                     li{
                         height:3rem;
                         line-height: 3rem;

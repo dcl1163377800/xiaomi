@@ -35,8 +35,8 @@
                 </div> 
               </div>
             </div>
-            <div class="watch2" @click="buy">
-              <div class="watch_list" v-for="item of watchList" :key="item.w_id"> 
+            <div class="watch2">
+              <div class="watch_list" v-for="item in watchList" :key="item.w_id"  @click="buy(item.w_id)"> 
                 <div class="w1">
                   <img :src="item.w_img" alt="">
                 </div>
@@ -163,8 +163,14 @@ export default {
     }
   },
   methods:{
-    buy(){
-      
+    buy(res){
+      // console.log(res);
+      this.$router.push({
+        path:'/goodsdetail',
+        query:{
+          id:res
+        }
+      })
     }
   },
   components: {
