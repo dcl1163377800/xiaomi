@@ -22,11 +22,12 @@ export default {
 <style lang="scss" scoped>
     .main{
         width: 100%;
-        height: 12rem;
+        height: 3.5rem;
         overflow: hidden;
         img{
-            height: 12rem;
+            // height: 12rem;
             width: 100%;
+            // height: 100%;
         }
     }
 </style>

@@ -39,16 +39,14 @@ export default {};
       }
     }
     .info_bwf {
-      padding-top: 1rem;
+      padding-top: 0.1rem;
       background: #fff;
       width: 96%;
-      height: 5.5rem;
       margin: 0 2%;
 
       .bwf1 {
         display: flex;
         align-items: center;
-        margin-bottom: 0.3rem;
         .bwf1_name {
           width: 50%;
           color:black;
@@ -58,7 +56,10 @@ export default {};
           font-size:20px;
           color: #ea625b;
           width: 50%;
-          padding-left: 47%;
+          // float:right;
+          text-align: right;
+          margin-right: .2rem;
+          // padding-left: 47%;
           // margin-left: %;
         }
       }
@@ -75,12 +76,8 @@ export default {};
           text-align: center;
            background: #ea625b;
            color:white;
-           height: 2rem;
-           line-height: 2rem;
-          // button {
-          //   margin-left:30%;
-          //   background:red;
-          // }
+           height: 0.6rem;
+           line-height: 0.6rem;
         }
       }
     }

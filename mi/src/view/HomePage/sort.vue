@@ -8,7 +8,7 @@
         <div class="nav">
             <div class="left_menu">
                 <ul>
-                    <li class="active" >新品</li>
+                    <li class="active">新品</li>
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
@@ -21,6 +21,19 @@
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+                    <li>新品</li>
+
                 </ul>
             </div>
             <div class="right_content"></div>
@@ -32,7 +45,7 @@
 export default {
     data(){
         return{
-
+           
         }
     },
     mothods:{
@@ -47,37 +60,39 @@ export default {
     .menu{
         position: fixed;
         width: 100%;
-        height: 3rem;
+        // height: 3rem;
         top: 0;
         background: #f2f2f2;
-        line-height: 3rem;
+        line-height: 1rem;
         display: flex;
         justify-content: space-between;
+        padding: 0 0.5rem;
         .icon-right{
-            margin-left: 1rem;
+           font-size: 0.5rem;
         }
         .icon-suosou{
-            margin-right:0.6rem;
+            font-size: 0.5rem;
         }
     }
 
         .nav{
-            height: 50rem;
             background: #fefefe;
             .left_menu{
                 position:fixed;
-                top:3rem;
+                top:1rem;
                 bottom:3rem;
                 left:0;
-                width:5rem;
+                width:2rem;
                 border-right: 1px solid #efefef;
-                overflow: hidden;
+                // overflow: hidden;
+                overflow-y: scroll; 
+                overflow-x: hidden;
                 ul{
                     padding:0.2rem 0.4rem 0.3rem 0;
-                    overflow-y: scroll;              
+                    overflow-y: scroll;             
                     li{
-                        height:3rem;
-                        line-height: 3rem;
+                        height:1rem;
+                        line-height: 1rem;
                         text-align: center;
                         font-size:12px;
                     }

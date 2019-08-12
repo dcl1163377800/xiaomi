@@ -1,6 +1,6 @@
 <template>
   <div class="phone_second">
-        <a href class="data_log" v-for="phone in phoneLlist" v-bind:key="phone.id">
+        <span class="data_log" v-for="phone in phoneLlist" v-bind:key="phone.id">
         <div class="img1">
             <img src="../../assets/list1.jpg" alt />
         </div>
@@ -10,7 +10,7 @@
             <div class="phone_price">{{phone.price}}</div>
             <button>立即预购</button>
         </div>
-        </a>
+        </span>
     <!-- <a href="" class="data_log"></a> -->
   </div>
 </template>
@@ -74,8 +74,9 @@ export default {
   flex-wrap: wrap;
   
   .data_log {
-    width: 47%;
-    margin: 0.5rem 0.35rem; 
+    width: 48%;
+    margin: 1%;
+    font-size: 14px;
     .img1 {
         img{
             width: 100%;
@@ -86,12 +87,11 @@ export default {
         width: 100%;
         background:white;
         text-align: center;
-        height: 8rem;
-        padding-top: 0.5rem;
+        padding-top: 0.2rem;
         button{
-            margin-top: 0.5rem;
-            width: 8rem;
-            height: 2rem;
+            margin: 0.2rem;
+            width: 2rem;
+            height: 0.6rem;
             border: 0;
             background: #ea625b;
             border-radius: 2px;

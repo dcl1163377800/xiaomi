@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app3">
         <header>
              <div class="logo_header">
                 <span class="iconfont icon-mi"></span>
@@ -7,7 +7,8 @@
                     <span class="iconfont icon-suosou"></span>
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
-                <span class="iconfont icon-wode4">登录</span>
+                <span class="iconfont icon-wode4"></span>
+                <router-link to="/login">登录</router-link>
             </div>
         </header>
         <main>
@@ -18,13 +19,13 @@
           <footer>
             <div>
                 <router-link to="/HomePage/firstPage" activeClass="active" tag="p">
-                    <span class="iconfont icon-shouyeweixuanzhong"></span>首页
+                    <span class="iconfont icon-tab-0"></span>首页
                 </router-link>
             </div>
             <div>
                 
                 <router-link to="/HomePage/sort" activeClass="active" tag="p">
-                     <span class="iconfont icon-wsdzb_zbgzt_xxzx_newpxb_type"></span> 分类
+                     <span class="iconfont icon-icon"></span> 分类
                 </router-link>
                
             </div>
@@ -49,23 +50,13 @@
 
 export default {
     components:{
-        }
+       
+    }
 }
 </script>
 
-<style lang="scss" scoped>
-    html {
-    font-size: -webkit-calc(100vw/7.5);
-    font-size: calc(100vw / 7.5);
-
-    }
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-   
-    #app {
+<style lang="scss" >
+    #app3 {
     width: 100vw;
     height: 100vh;
     display: -webkit-flex;
@@ -73,11 +64,11 @@ export default {
     flex-direction: column;
         header{
             width: 100%;
-            height: 2.5rem;
+            // height: 2.5rem;
             background: #f2f2f2;
               .logo_header{
                 width: 100%;
-                height: 3rem;
+                // height: 3rem;
                 text-align: center;
                 color: gray;
                 display: flex;
@@ -85,24 +76,24 @@ export default {
                 align-items: center;
                     .icon-mi{
                         color: rgb(237, 91, 0);
-                        font-size: 1.5rem;
+                        font-size: .5rem;
                     }
                     .search{
                         background:#fff;
                         padding-left:10px;
-                        height: 2rem;
+                        // height: 2rem;
                         display:flex;
                         align-items: center;
                         input{
                             color:rgba(0,0,0,.3);
                             border: 0;
-                            width: 13rem;
-                            height: 1.5rem;
+                            width: 80%;
                             padding:0.2rem;
                             outline:none;
                         }
                     }
                 }
+            
         }
          main{
             flex: 1;
@@ -110,20 +101,19 @@ export default {
         }
          footer{
             width: 100%;
-            height: 3rem;
+            // height: 2rem;
             display: flex;
             justify-content: space-around;
             div{
                 text-align: center;
                 display: block;
                 width: 25%;
-                height: 3rem;
-                font-size: 15px;
+                font-size: 12px;
                 color: #999;
                 span{
                     display: block;
                     margin: 6px 0;
-                    font-size: 1rem;
+                    font-size: 0.5rem;
                 }
                 .active{
                     color: orange;
@@ -133,8 +123,6 @@ export default {
      
     }
    
-   
-  
 </style>
 
 

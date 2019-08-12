@@ -18,6 +18,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  html {
+    font-size: -webkit-calc(100vw/7.5);
+    font-size: calc(100vw / 7.5);
 
+    }
+    body{
+        font-size: .24rem;
+    }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
 </style>

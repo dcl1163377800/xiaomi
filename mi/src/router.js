@@ -5,6 +5,9 @@ import Myshoppingcar from "./view/HomePage/myshoppingcar.vue";
 import Shoppingcar from "./view/HomePage/shoppingcar.vue";
 import Sort from "./view/HomePage/sort.vue";
 import HomePage from "./view/HomePage/index.vue";
+import Goodsdetail from './components/Goodsdetail.vue'
+import Login from './components/Login.vue';
+import Register from './components/Register';
 
 Vue.use(Router);
 const router=new Router({
@@ -31,13 +34,26 @@ const router=new Router({
                 {
                     path:"sort",
                     component:Sort
-                }
+                },
+                {
+                    path:'/goodsdetail',
+                    component:Goodsdetail
+                },
             ]
         },
         {
             path: "/",
             redirect: '/HomePage/firstPage' //当路径为空时 /film/sort为默认页面
         },
+        {
+            path:'/login',
+            component:Login
+        },
+        {
+            path:'/register',
+            component:Register
+        },
+       
     ]
 })
 export default router;
