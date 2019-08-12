@@ -59,6 +59,7 @@
                     </div>
                     <div class="address">
                         <span class="ad_left">送至</span>
+                        <span></span>
                     </div>
                     <div class="mi">
                         <span>小米自营</span>
