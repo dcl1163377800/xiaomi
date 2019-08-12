@@ -1,18 +1,20 @@
 <template>
     <div>
-        首页
-        <div class="menu"></div>
+        <Tabber></Tabber>
+        
     </div>
 </template>
 
 <script>
+import Tabber from '../../components/tabbar'
 export default {
-    name:"FirstPage"
+    name:"FirstPage",
+    components:{
+        Tabber
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-    .menu{
-        height: 50rem;
-    }
+    
 </style>

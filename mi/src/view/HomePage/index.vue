@@ -12,6 +12,7 @@
         </header>
         <main>
             <router-view></router-view>
+           
         </main>
         
           <footer>
@@ -44,35 +45,27 @@
 </template>
 
 <script>
-// import Header from "../common/Header";
+
 
 export default {
     components:{
-        // Header,
+       
     }
 }
 </script>
 
 <style lang="scss" scoped>
     html {
-        overflow-y: scroll;
-        font-size: -webkit-calc(100vw/7.5);
-        font-size: calc(100vw / 7.5);
+    font-size: -webkit-calc(100vw/7.5);
+    font-size: calc(100vw / 7.5);
+
     }
     * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     }
-    li {
-    list-style: none;
-    }
-    img {
-    vertical-align: top;
-    }
-    a {
-    text-decoration: none;
-    }
+   
     #app {
     width: 100vw;
     height: 100vh;
@@ -81,12 +74,13 @@ export default {
     flex-direction: column;
         header{
             width: 100%;
-            height: 3rem;
+            height: 2rem;
+            background: #f2f2f2;
               .logo_header{
                 width: 100%;
                 height: 3rem;
                 text-align: center;
-                background: #f2f2f2;
+                
                 color: gray;
                 display: flex;
                 justify-content: space-around;
@@ -104,17 +98,16 @@ export default {
                         input{
                             color:rgba(0,0,0,.3);
                             border: 0;
-                            width: 6rem;
+                            width: 13rem;
                             height: 1.5rem;
                             padding:0.2rem
                         }
                     }
-        }
+                }
         }
          main{
             flex: 1;
             overflow-y: scroll;
-            background: red;
         }
          footer{
             width: 100%;

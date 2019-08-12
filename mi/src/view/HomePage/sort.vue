@@ -1,14 +1,14 @@
 <template>
     <div class="sort">
         <div class="menu">
-            <span>《</span>
+            <span class="iconfont icon-right"></span>
             <span>分类</span>
             <span class="iconfont icon-suosou"></span>
         </div>
         <div class="nav">
             <div class="left_menu">
                 <ul>
-                    <li>新品</li>
+                    <li class="active" >新品</li>
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
@@ -30,7 +30,16 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+
+        }
+    },
+    mothods:{
+        changeColor(){
+            
+        }
+    }
 }
 </script>
 
@@ -43,7 +52,13 @@ export default {
         background: #f2f2f2;
         line-height: 3rem;
         display: flex;
-        justify-content: space-around;   
+        justify-content: space-between;
+        .icon-right{
+            margin-left: 1rem;
+        }
+        .icon-suosou{
+            margin-right:0.6rem;
+        }
     }
         .nav{
             height: 50rem;
@@ -56,7 +71,6 @@ export default {
                 width:5rem;
                 border-right: 1px solid #efefef;
                 overflow: hidden;
-                z-index: 1;
                 ul{
                     padding:0.2rem 0.4rem 0.3rem 0;
                     overflow-y: scroll;              
@@ -65,6 +79,10 @@ export default {
                         line-height: 3rem;
                         text-align: center;
                         font-size:12px;
+                    }
+                    .active{
+                        color:#fb7d34;
+                        font-size:18px;
                     }
                 }
             }
