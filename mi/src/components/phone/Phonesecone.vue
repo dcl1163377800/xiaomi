@@ -11,6 +11,7 @@
             <button>立即预购</button>
         </div>
         </span>
+        
     <!-- <a href="" class="data_log"></a> -->
   </div>
 </template>
