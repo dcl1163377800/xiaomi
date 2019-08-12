@@ -49,16 +49,15 @@
 
 export default {
     components:{
-        // Tabber
-    }
+        }
 }
 </script>
 
 <style lang="scss" scoped>
-
     html {
     font-size: -webkit-calc(100vw/7.5);
     font-size: calc(100vw / 7.5);
+
     }
     * {
     margin: 0;

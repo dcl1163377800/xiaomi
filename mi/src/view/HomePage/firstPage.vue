@@ -1,7 +1,10 @@
 <template>
     <div>
+
         
          <Tabber></Tabber>
+
+        
     </div>
 </template>
 
@@ -10,7 +13,7 @@ import Tabber from "../../components/tabbar"
 export default {
     name:"FirstPage",
     components:{
-Tabber
+    Tabber,
     }
 }
 </script>
