@@ -1,13 +1,17 @@
 <template>
     <div>
         
-        
+         <Tabber></Tabber>
     </div>
 </template>
 
 <script>
+import Tabber from "../../components/tabbar"
 export default {
-    name:"FirstPage"
+    name:"FirstPage",
+    components:{
+Tabber
+    }
 }
 </script>
 

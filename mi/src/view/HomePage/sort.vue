@@ -30,8 +30,8 @@ export default {
         justify-content: space-around;
     
     }
-        .nav{
-            height: 50rem;
-            background: yellow;
-        }
+        // .nav{
+        //     height: 50rem;
+        //     background: yellow;
+        // }
 </style>
