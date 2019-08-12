@@ -1,16 +1,19 @@
 <template>
     <div>
-        <Tabber></Tabber>
+
+        
+         <Tabber></Tabber>
+
         
     </div>
 </template>
 
 <script>
-import Tabber from '../../components/tabbar'
+import Tabber from "../../components/tabbar"
 export default {
     name:"FirstPage",
     components:{
-        Tabber
+    Tabber,
     }
 }
 </script>

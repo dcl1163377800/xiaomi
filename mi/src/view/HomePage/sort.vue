@@ -50,6 +50,7 @@ export default {
             margin-right:0.6rem;
         }
     }
+
         .nav{
             height: 50rem;
             background: #fefefe;

@@ -49,8 +49,7 @@
 
 export default {
     components:{
-       
-    }
+        }
 }
 </script>
 
@@ -74,13 +73,12 @@ export default {
     flex-direction: column;
         header{
             width: 100%;
-            height: 2rem;
+            height: 2.5rem;
             background: #f2f2f2;
               .logo_header{
                 width: 100%;
                 height: 3rem;
                 text-align: center;
-                
                 color: gray;
                 display: flex;
                 justify-content: space-around;
@@ -100,7 +98,8 @@ export default {
                             border: 0;
                             width: 13rem;
                             height: 1.5rem;
-                            padding:0.2rem
+                            padding:0.2rem;
+                            outline:none;
                         }
                     }
                 }
