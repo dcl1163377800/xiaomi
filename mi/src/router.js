@@ -8,6 +8,7 @@ import HomePage from "./view/HomePage/index.vue";
 import Goodsdetail from './components/Goodsdetail.vue'
 import Login from './components/Login.vue';
 import Register from './components/Register';
+import GoodsComputer from "./components/GoodsComputer.vue";
 
 Vue.use(Router);
 const router=new Router({
@@ -38,6 +39,10 @@ const router=new Router({
                 {
                     path:'/goodsdetail',
                     component:Goodsdetail
+                },
+                {
+                    path:'/goodsComputer',
+                    component:GoodsComputer
                 },
             ]
         },

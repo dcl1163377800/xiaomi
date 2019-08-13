@@ -7,8 +7,10 @@
                     <span class="iconfont icon-suosou"></span>
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
-                <span class="iconfont icon-wode4"></span>
-                <router-link to="/login">登录</router-link>
+                
+                <router-link to="/login">
+                    <span class="iconfont icon-wode4">登录</span>
+                </router-link>
             </div>
         </header>
         <main>
@@ -74,6 +76,9 @@ export default {
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
+                    .icon-wode4{
+                        color: #999;
+                    }
                     .icon-mi{
                         color: rgb(237, 91, 0);
                         font-size: .5rem;

@@ -96,47 +96,14 @@
               </div>
           </div>
           <div class="listWrap">
-              <div class="box">
+              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.c_id)">
                   <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
+                      <img :src="computer.c_img" alt="">
                   </div>
                   <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
+                      <p>{{computer.com_name}}</p>
+                      <p>{{computer.com_title}}</p>
+                      <p>￥{{computer.price}}起</p>
                       <button>立即预定</button>
                   </div>
               </div>
@@ -159,6 +126,12 @@ export default {
         {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
         {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
         {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+      ],
+       computerList:[
+        {c_id:'001',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        {c_id:'002',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        {c_id:'003',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        {c_id:'004',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
       ]
     }
   },
@@ -169,6 +142,15 @@ export default {
         path:'/goodsdetail',
         query:{
           id:res
+        }
+      })
+    },
+    computerBy(result){
+      console.log(result);
+      this.$router.push({
+        path:"/goodsComputer",
+        query:{
+          id:result
         }
       })
     }
