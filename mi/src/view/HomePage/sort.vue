@@ -52,15 +52,15 @@
 export default {
     data(){
         return{
-           phones:[
-               {phone_id:'01',phone_name:'小米cc9',phone_img:require('../assets/p2.png')},
-               {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../assets/p2.png')},
-               {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../assets/p2.png')},
-               {phone_id:'04',phone_name:'小米9',phone_img:require('../assets/p2.png')},
-               {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../assets/p2.png')},
-               {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../assets/p2.png')},
-               {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../assets/p2.png')},
-           ]
+        //    phones:[
+        //        {phone_id:'01',phone_name:'小米cc9',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'04',phone_name:'小米9',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../assets/p2.png')},
+        //        {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../assets/p2.png')},
+        //    ]
         }
     },
     mothods:{
@@ -115,7 +115,7 @@ export default {
             }
             .right_content{
                 background-color: #000;
-                
+                float: right;
             }
         }
 </style>
