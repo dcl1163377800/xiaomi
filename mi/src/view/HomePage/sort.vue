@@ -45,7 +45,7 @@
 export default {
     data(){
         return{
-           
+
         }
     },
     mothods:{
@@ -102,6 +102,10 @@ export default {
                     }
                 }
             }
-             
+            // .right_content{
+            //     background-color: #000;
+            //     float: right;
+            // }
+
         }
 </style>
