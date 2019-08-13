@@ -9,7 +9,8 @@
                 </div>
                 
                 <router-link to="/login">
-                    <span class="iconfont icon-wode4">登录</span>
+                    <span class="iconfont icon-wode4" id="lo_btn">登录</span>
+                    <!-- <span class="iconfont icon-wode4" v-else>{{this.$store.state.tel}}</span> -->
                 </router-link>
             </div>
         </header>
@@ -53,6 +54,18 @@
 export default {
     components:{
        
+    },
+    mounted(){
+        let btn=document.getElementById('lo_btn');
+        if(window.sessionStorage.tel){
+            btn.innerHTML=window.sessionStorage.tel;
+        }
+        // if(this.$store.state.tel){
+        //     console.log(this.$store.state.tel)
+        //     btn.innerHTML = this.$store.state.tel;
+        // }else{
+
+        // }
     }
 }
 </script>
@@ -70,7 +83,7 @@ export default {
             background: #f2f2f2;
               .logo_header{
                 width: 100%;
-                // height: 3rem;
+                height: 0.9rem;
                 text-align: center;
                 color: gray;
                 display: flex;
@@ -86,13 +99,15 @@ export default {
                     .search{
                         background:#fff;
                         padding-left:10px;
-                        // height: 2rem;
+                        height: 0.6rem;
+                        width:70%;
                         display:flex;
                         align-items: center;
                         input{
                             color:rgba(0,0,0,.3);
                             border: 0;
-                            width: 80%;
+                            // width: 90%;
+                            height:0.6rem;
                             padding:0.2rem;
                             outline:none;
                         }

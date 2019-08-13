@@ -7,7 +7,7 @@
       <div class="info_bwf">
         <div class="bwf1">
           <div class="bwf1_name">小米MIX3</div>
-          <div class="bwf1_price">$2999</div>
+          <div class="bwf1_price">￥2999</div>
         </div>
         <div class="bwf2">
           <div class="bwf2_brief">Dx0百分相机,四曲面陶瓷机身</div>
@@ -23,8 +23,8 @@ export default {};
 <style lang="scss" scoped>
 .list_one {
   width: 100%;
-  background-color: #ccc;
-  // opacity: 0.5;
+  // padding:1%;
+  background-color: rgb(230, 231, 251);
   overflow: hidden;
   .phone_a {
     width: 100%;

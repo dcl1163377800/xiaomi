@@ -84,12 +84,6 @@ export default {
             },
           ]
         },
-        // {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../../assets/3.jpg')},
-        // {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../../assets/3.jpg')},
-        // {phone_id:'04',phone_name:'小米9',phone_img:require('../../assets/3.jpg')},
-        // {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../../assets/3.jpg')},
-        // {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../../assets/3.jpg')},
-        // {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../../assets/3.jpg')}
       ]
     };
   },
@@ -186,3 +180,4 @@ export default {
   }
 }
 </style>
+

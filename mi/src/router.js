@@ -36,14 +36,6 @@ const router=new Router({
                     path:"sort",
                     component:Sort
                 },
-                {
-                    path:'/goodsdetail',
-                    component:Goodsdetail
-                },
-                {
-                    path:'/goodsComputer',
-                    component:GoodsComputer
-                },
             ]
         },
         {
@@ -58,7 +50,14 @@ const router=new Router({
             path:'/register',
             component:Register
         },
-       
+        {
+            path:'/goodsdetail',
+            component:Goodsdetail
+        },
+        {
+            path:'/goodsComputer',
+            component:GoodsComputer
+        },
     ]
 })
 export default router;

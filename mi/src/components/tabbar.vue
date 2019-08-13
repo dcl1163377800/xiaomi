@@ -1,5 +1,5 @@
 <template>
-  <div  class="tbar">
+  <div class="tbar">
     <mt-navbar v-model="selected">
       <mt-tab-item id="1">手机</mt-tab-item>
       <mt-tab-item id="2">电视</mt-tab-item>
@@ -36,18 +36,18 @@
               </div>
             </div>
             <div class="watch2">
-              <div class="watch_list" v-for="item of watchList" :key="item.w_id" @click="buy(item.w_id)"> 
+              <div class="watch_list" v-for="item of watchList" :key="item.w_id" @click="buy(item.tId)"> 
                 <div class="w1">
-                  <img :src="item.w_img" alt="">
+                  <img :src="item.tImg" alt="">
                 </div>
                 <div class="w2">        
-                  <p class="watch_name">{{item.w_name}}</p>
-                  <p class="watch_brief">{{item.w_brief}}</p>
+                  <p class="watch_name">{{item.tName}}</p>
+                  <p class="watch_brief">{{item.t_brief}}</p>
                   <p class="watch_price">
-                    <span class="new_price">{{item.new_price}}</span>
-                    <span class="old_price">{{item.old_price}}</span>
+                    <span class="new_price">{{item.newPrice}}</span>
+                    <span class="old_price">{{item.oldPrice}}</span>
                   </p>
-                  <button class="buy" @click="buy">立即购买</button>
+                  <button class="buy">立即购买</button>
                 </div>              
               </div>
             </div>
@@ -96,14 +96,14 @@
               </div>
           </div>
           <div class="listWrap">
-              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.c_id)">
+              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.lID)">
                   <div class="imgList">
-                      <img :src="computer.c_img" alt="">
+                      <img :src="computer.lImg" alt="">
                   </div>
                   <div class="list2">
-                      <p>{{computer.com_name}}</p>
-                      <p>{{computer.com_title}}</p>
-                      <p>￥{{computer.price}}起</p>
+                      <p>{{computer.lName}}</p>
+                      <p>{{computer.lBrief}}</p>
+                      <p>￥{{computer.newPrice}}起</p>
                       <button>立即预定</button>
                   </div>
               </div>
@@ -117,7 +117,9 @@ import Swiper from "./swiper";
 import Telswiper from "./Telswiper";
 import Phonefirst from "../components/phone/Phonefirst";
 import phonesecond from '../components/phone/Phonesecone';
+
 import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -137,19 +139,19 @@ export default {
     }
   },
   mounted(){
-    axios.get('/products').then((res)=>{
-      console.log(111)
-        let watchList=res.data.products.watchList;
-        console.log(watchList)
 
-        watchList.forEach((item)=>{
-          console.log(item)
-          this.watchList.push(item);
-        })
+    axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
+      console.log(res.data);
+      this.computerList = res.data;
+      
+    });
+    axios.get('http://192.168.61.244:8080/XiaoMi//Tv').then((res)=>{
+      console.log(res.data);
+      this.watchList = res.data;
     })
   },
   methods:{
-      buy(res){
+    buy(res){
       console.log(res);
       this.$router.push({
         path:'/goodsdetail',
@@ -180,18 +182,15 @@ export default {
 <style lang="scss" scoped>
  .tbar{
     width: 100%;
-    height: 2rem;
+    height: 1rem;
      .mint-navbar{
-        // height: 2rem;
         background: #f2f2f2;
-        margin-bottom: 0.08rem;
+        padding-bottom: 0.07rem;
         color: gray;
 
          .mint-tab-item.is-selected {
-            border-bottom: 3px solid orange;
-            color: orange;
-            margin-bottom: -3px;
-
+            border-bottom: 2px solid rgb(237,91,0);
+            color: rgb(237,91,0);
          }
 
     }
@@ -209,7 +208,6 @@ export default {
     .content {
       .watch1{
         width: 100%;
-        // height: 6rem;
         img{
           width: 100%;
           
@@ -235,8 +233,6 @@ export default {
               color: rgba(0,0,0,.54);
               font-size:12px;
               float:left;
-              // height:1.5rem;
-              // line-height:1.5rem;
             }
             .buy{
               width:2rem;
@@ -255,13 +251,13 @@ export default {
         flex-wrap: wrap;
         justify-content: space-between;
         .watch_list{
-          // display:flex;
-          // flex-direction: column;
            margin: 1% 0;
           width: 49%;
           .w1{
+            height:3rem;
             img{
               width:100%;
+              height:100%;
             }
           }
           .w2{
@@ -303,10 +299,8 @@ export default {
     width: 100%;
     a {
         width:100%;
-        // height: 15rem;
       img {
         width: 100%;
-        // height: 15rem;
       }
     }
   }
@@ -348,9 +342,12 @@ export default {
                 background: white;
                 display: flex;
                 justify-content: space-between;
+                padding:0.2rem 0.2rem;
+                display: flex;
+                align-items: center;
                 .gameText{
                     p{
-                        margin: 0.2rem 0.5rem;
+                      line-height: 0.5rem;;
                     }
                 }
                 .priceText{
@@ -384,6 +381,7 @@ export default {
                   // margin: 0.4rem 0.11rem;
                   margin: 1%;
                 .imgList{
+                    height:3rem;
                     border-bottom: 1px solid gray;
                     img{
                         width: 100%;
