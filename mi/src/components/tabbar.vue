@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;height:2rem" class="tbar">
+  <div class="tbar">
     <mt-navbar v-model="selected">
       <mt-tab-item id="1">手机</mt-tab-item>
       <mt-tab-item id="2">电视</mt-tab-item>
@@ -16,8 +16,8 @@
         </div>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
-        <div class="tel" >
           <Telswiper></Telswiper>
+        <div class="tel" >
           <div class="Explosive">
             <img src="../assets/ex.jpg" alt="">  
           </div> 
@@ -36,16 +36,16 @@
               </div>
             </div>
             <div class="watch2">
-              <div class="watch_list" v-for="item in watchList" :key="item.w_id"  @click="buy(item.w_id)"> 
+              <div class="watch_list" v-for="item of watchList" :key="item.w_id" @click="buy(item.tId)"> 
                 <div class="w1">
-                  <img :src="item.w_img" alt="">
+                  <img :src="item.tImg" alt="">
                 </div>
                 <div class="w2">        
-                  <p class="watch_name">{{item.w_name}}</p>
-                  <p class="watch_brief">{{item.w_brief}}</p>
+                  <p class="watch_name">{{item.tName}}</p>
+                  <p class="watch_brief">{{item.t_brief}}</p>
                   <p class="watch_price">
-                    <span class="new_price">{{item.new_price}}</span>
-                    <span class="old_price">{{item.old_price}}</span>
+                    <span class="new_price">{{item.newPrice}}</span>
+                    <span class="old_price">{{item.oldPrice}}</span>
                   </p>
                   <button class="buy">立即购买</button>
                 </div>              
@@ -96,47 +96,14 @@
               </div>
           </div>
           <div class="listWrap">
-              <div class="box">
+              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.lID)">
                   <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
+                      <img :src="computer.lImg" alt="">
                   </div>
                   <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
-                      <button>立即预定</button>
-                  </div>
-              </div>
-               <div class="box">
-                  <div class="imgList">
-                      <img src="../assets/10.jpg" alt="">
-                  </div>
-                  <div class="list2">
-                      <p>RedmiBook 14</p>
-                      <p>超轻薄全金属笔记本</p>
-                      <p>￥3199起</p>
+                      <p>{{computer.lName}}</p>
+                      <p>{{computer.lBrief}}</p>
+                      <p>￥{{computer.newPrice}}起</p>
                       <button>立即预定</button>
                   </div>
               </div>
@@ -150,17 +117,35 @@ import Swiper from "./swiper";
 import Telswiper from "./Telswiper";
 import Phonefirst from "../components/phone/Phonefirst";
 import phonesecond from '../components/phone/Phonesecone';
+import axios from 'axios'; 
 export default {
   data() {
     return {
       selected: "1",
       watchList:[
-        {w_id:'01',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'01',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+      ],
+       computerList:[
+        // {c_id:'001',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'002',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'003',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'004',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
       ]
     }
+  },
+  mounted(){
+    axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
+      console.log(res.data);
+      this.computerList = res.data;
+      
+    });
+    axios.get('http://192.168.61.244:8080/XiaoMi//Tv').then((res)=>{
+      console.log(res.data);
+      this.watchList = res.data;
+    })
   },
   methods:{
     buy(res){
@@ -169,6 +154,15 @@ export default {
         path:'/goodsdetail',
         query:{
           id:res
+        }
+      })
+    },
+    computerBy(result){
+      console.log(result);
+      this.$router.push({
+        path:"/goodsComputer",
+        query:{
+          id:result
         }
       })
     }
@@ -184,39 +178,45 @@ export default {
  
 <style lang="scss" scoped>
  .tbar{
+    width: 100%;
+    height: 1rem;
      .mint-navbar{
-        height: 2rem;
         background: #f2f2f2;
-        margin-bottom: 0.3rem;
+        padding-bottom: 0.07rem;
         color: gray;
 
          .mint-tab-item.is-selected {
-            border-bottom: 3px solid orange;
-            color: orange;
-            margin-bottom: -3px;
-
+            border-bottom: 2px solid rgb(237,91,0);
+            color: rgb(237,91,0);
          }
 
     }
 .mint-tab-container-item {
   .tel{
     background-color:rgb(159,0,33);
-    padding:0 0.3rem 0.3rem 0.3rem;
-    .Explosive img{
-      height:3.2rem;
+    padding:2%;
+    .Explosive{
+      width: 100%;
+        img{
+         width: 100%;
+         height: 100%;
     }
+    } 
     .content {
       .watch1{
+        width: 100%;
         img{
-          height:14.3em;
+          width: 100%;
+          
         }
         .watch1_content{
           background: #fff;
-          padding:0.6rem 0.8rem;
+          padding:7px 1%;
           .w1{
             overflow: hidden;
             .watch1_name{
               float: left;
+              margin-bottom: 0.2rem;
             }
             .watch1_price{
               font-size:12px;
@@ -230,12 +230,10 @@ export default {
               color: rgba(0,0,0,.54);
               font-size:12px;
               float:left;
-              height:1.5rem;
-              line-height:1.5rem;
             }
             .buy{
-              width:6rem;
-              height:1.5rem;
+              width:2rem;
+              height:0.6rem;
               float:right;
               background-color:#ea625b;
               border:0;
@@ -250,28 +248,25 @@ export default {
         flex-wrap: wrap;
         justify-content: space-between;
         .watch_list{
-          display:flex;
-          flex-direction: column;
-          margin-top: 0.3rem;;
+           margin: 1% 0;
+          width: 49%;
           .w1{
-            width: 11.3rem;
+            height:3rem;
             img{
               width:100%;
+              height:100%;
             }
           }
           .w2{
             background: #fff;
             text-align: center;
+            padding-top: 0.2rem;
             .watch_name{
               font-size:14px;
-              height:1.5rem;
-              line-height:1.5rem;
             }
             .watch_brief{
               font-size:12px;
               color:rgba(0,0,0,.54);
-              height:1.2rem;
-              line-height:1.2rem;
             }
             .watch_price{
               font-size:12px;
@@ -284,13 +279,13 @@ export default {
               }
             }
             button{
-              width:6rem;
-              height:1.5rem;
+              width:2rem;
+              height:0.6rem;
               background-color:#ea625b;
               border:0;
               border-radius:0.2rem;
               color:#fff;
-              margin:0.3rem;
+              margin:0.2rem;
             }
           }
         }
@@ -299,31 +294,15 @@ export default {
   }
   .computer {
     width: 100%;
-    height: 15rem;
     a {
         width:100%;
-        height: 15rem;
       img {
         width: 100%;
-        height: 15rem;
       }
     }
   }
-  .computer {
-            width: 100%;
-            height: 15rem;
-            a {
-                width:100%;
-                height: 15rem;
-            img {
-                width: 100%;
-                height: 15rem;
-             }
-            }
-        }
         .picList{
             width: 100%;
-            height: 5rem;
             display: flex;
             justify-content: center;
             span{
@@ -337,50 +316,52 @@ export default {
         }
         .side{
             width: 100%;
-            height: 5rem;
             img{
                 width: 100%;
                 height: 100%;
             }
         }
         .menu{
-            width: 22.9rem;
-            height: 20rem;
+            width:100%;
             background: black;
-            padding: 0 0.3rem;
+            padding: 0 1%;
             font-size: 14px;
             .topPic{
-                height: 15rem;
+                // height: 15rem;
                 border-bottom: 1px solid gray;
                 img{
                     width: 100%;
-                    height: 100%;
+                    // height: 100%;
                 }
             }
             .botoomText{
-                height: 5rem;
+                // height: 5rem;
                 background: white;
                 display: flex;
                 justify-content: space-between;
+                padding:0.2rem 0.2rem;
+                display: flex;
+                align-items: center;
                 .gameText{
                     p{
-                        margin: 0.5rem 0.5rem;
+                      line-height: 0.5rem;;
                     }
                 }
                 .priceText{
                     p{
-                        margin-left: 2rem;
-                        margin-top: 0.8rem;
+                        margin-left: 0.6rem;
+                        margin-top: 0.3rem;
                         color: #ea625b;
                     }
                     button{
-                        margin: 0 0.5rem;
+                        // margin: 0 0.5rem;
                         border: 0;
-                        width: 6rem;
-                        height: 2rem;
+                        width: 2rem;
+                        height: 0.6rem;
                         background:  #ea625b;
                         color: white;
                         border-radius: 2px;
+                        float: right;
                     }
                 }
             }
@@ -392,11 +373,12 @@ export default {
             display: flex;
             flex-wrap: wrap;
             .box{
-                width: 11rem;
-                height: 15rem;
-                margin: 0.5rem 0.35rem;
+                  width: 48%;
+                  // height: 15rem;
+                  // margin: 0.4rem 0.11rem;
+                  margin: 1%;
                 .imgList{
-                    height: 8rem;
+                    height:3rem;
                     border-bottom: 1px solid gray;
                     img{
                         width: 100%;
@@ -404,10 +386,10 @@ export default {
                     }
                 }
                 .list2{
-                    padding-top: 0.5rem;
+                    padding-top: 0.2rem;
                     background: white;
                     text-align: center;
-                    height: 7rem;
+                    // height: 7rem;
                     p:nth-child(2){
                         color: gray;
                     }
@@ -416,12 +398,12 @@ export default {
                     }
                     button{
                         border: 0;
-                        width: 6rem;
-                        height: 2rem;
+                        width: 2rem;
+                        height: 0.6rem;
                         background:  #ea625b;
                         color: white;
                         border-radius: 2px;
-                        margin-top: 0.5rem;
+                        margin: 0.2rem;
                     }
                 }
             }

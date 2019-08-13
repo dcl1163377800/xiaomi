@@ -10,16 +10,13 @@
           <p class="phone">
             <span>+86</span>
             <span class="iconfont icon-icon1"></span>
-            <input type="text" ref="reg_phone" placeholder="手机号码" @blur="reg_test" />
-            <i ref="phone_test"></i>
+            <input type="text" ref="reg_phone" placeholder="手机号码" />
           </p>
           <p class="name">
             <input type="text" ref="reg_name" placeholder="用户名" />
-            <i ref="name_test"></i>
           </p>
           <p class="pwd">
             <input type="text" ref="reg_pwd" placeholder="输入密码" />
-            <i ref="pwd_test"></i>
           </p>
           <p class="confirm">
             <input type="text" ref="reg_confirm" placeholder="确认密码" />
@@ -41,124 +38,82 @@ import axios from "axios";
 export default {
   name: "register",
   methods: {
-    reg_test() {
-      // let tel = this.$refs.reg_phone.value;
-      // let username = this.$refs.reg_name.value;
-      // let password = this.$refs.reg_pwd.value;
-      // let reg_confirm = this.$refs.reg_confirm.value;
-      // this.$refs.test.innerHTML = null;
-    },
     register() {
       let tel = this.$refs.reg_phone.value;
-      let username = this.$refs.reg_name.value;
       let password = this.$refs.reg_pwd.value;
       let reg_confirm = this.$refs.reg_confirm.value;
-      this.$refs.phone_test.innerHTML = null;
-      this.$refs.name_test.innerHTML = null;
-      this.$refs.pwd_test.innerHTML = null;
-      // if(password !== reg_confirm){
-      //     alert("密码不一致");
-      //     return;
-      // }
-      var phone = /^1[3456789]\d{9}$/;
-      var user_name = /^[a-zA-Z\u4e00-\u9fa5]\w{5,11}$/gi;
+      let username = this.$refs.reg_name.value;
+
+      var name = /^[a-zA-Z\u4e00-\u9fa5]\w{5,11}$/gi;
       var pwd = /[\w\d]{6,12}$/;
-      var flag = false;
+      var phone = /^1[3456789]\d{9}$/;
+
       if (phone.test(tel)) {
-        console.log(1);
-        // console.log(this.$refs.phone_test.innerHTML)
-        this.$refs.phone_test.innerHTML = "ok";
-        if (user_name.test(username)) {
-          console.log(3);
-          this.$refs.name_test.innerHTML = "ok";
+        // '18571772895'
+        console.log("wy");
+        if (name.test(username)) {
+          console.log("wy1");
           if (pwd.test(password)) {
-            console.log(4);
-            this.$refs.pwd_test.innerHTML = "ok";
-            flag = true;
-            if (flag) {
-                // let user = {
-                //     tel,
-                //     password,
-                //     username
-                // };
-                console.log(username)
-                axios.get(`http://192.168.61.244:8080/XiaoMi/regist?username=${username}&password=${password}&tel=${tel}`)
-                .then(res => {
-                  console.log(res);
-                  if (res.data.code === 1) {
-                    this.$router.push('/login');
-                    //  alert("注册成功");
-                  } else {
-                    // alert("用户名不存在");
+            console.log("wy2");
+            if (password == reg_confirm) {
+                console.log(username,password,tel)
+              // console.log('wy3')
+              axios
+                .get(
+                  `http://192.168.61.244:8080/XiaoMi/regist?username=${username}&password=${password}&tel=${tel}`
+                )
+                .then(result => {
+                  console.log(result.data);
+                  if(result.data.code==1){
+                      if(confirm('注册成功,去登陆?')){
+                          this.$router.push('/login')
+                      }
+
                   }
                 });
-             
+            } else {
+              alert("确认密码与新密码不相同");
             }
           } else {
-            alert("密码不正确或格式不正确");
+            alert("密码格式不正确或者密码不能为空");
           }
         } else {
-          alert("用户名不存在或格式不正确");
+          alert("用户名格式不正确或用户名不能为空,请重新输入");
         }
-
-        // userList.isPhone(phone).then(data => {
-        //     console.log(data);
-        //     if (data.status) {
-        //         $('#phone').nextAll().remove("img");
-        //         $("#phone").after("<span id='phone1'>手机号已存在</span>")
-        //     } else {
-        //         // $('#phone').nextAll().remove("img");
-        //         // $("#phone").after("<img src='../images/62.png'>");
-        //         $(this).data("flag", true);
-        //         $("#phone").after("<span id='phone1'>√</span>")
-        //     }
-        // })
       } else {
-        console.log(2);
-        alert("电话号码格式不正确或者不能为空或已存在");
-        // $("#phone").after("<span id='phone1'>手机号格式有误</span>")
+        alert("电话号码格式不正确或不能为空");
       }
-    //   let user = {
-    //     tel,
-    //     password,
-    //     username
-    //   };
-    //   axios.post("http://192.168.61.244:8080/XiaoMi/regist", user).then(res => {
-    //     // console.log(res);
-    //     if (res.data.code === 1) {
-    //       // this.$router.push('/login');
-    //     } else {
-    //       alert("用户名不存在");
-    //     }
-    //   });
+
+      // let params = 'username=' + username + "&password=" + password + '&tel=' + tel;
     }
   }
 };
 </script>
 <style lang="scss" scoped>
 .login {
-  margin: 1.7rem 1.2rem 0 1.2rem;
+  margin: 8% 0;
   text-align: center;
   .mi_logo {
     span {
-      font-size: 3rem;
+      font-size: 1rem;
       color: #ff6700;
     }
   }
   p {
-    height: 2.7rem;
-    line-height: 2.7rem;
+    margin: 3% 0;
     font-size: 18px;
   }
   .login_inp {
     form {
+      padding: 0 5%;
       p {
         border-bottom: 1px solid #d3d3d3;
         color: #9b9b9b;
         font-size: 18px;
         text-align: left;
-        height: 3rem;
-        line-height: 3rem;
+        margin: 1% 0;
+        height:1rem;
+        line-height:1rem;
         input {
           border: none;
           color: #9b9b9b;
@@ -174,36 +129,20 @@ export default {
       }
       .code {
         span {
-          // text-align: right;
           float: right;
-          padding-right: 1rem;
           font-size: 14px;
           color: #2ea5e5;
         }
       }
       .reg_btn {
         border: 0;
-        margin-top: 1.2rem;
+        margin-top:0.4rem;
         input {
           background: #ff6700;
           color: #fff;
           width: 100%;
           border-radius: 8px;
-          height: 3rem;
-          line-height: 3rem;
-        }
-      }
-      .login_btn {
-        border: 0;
-        margin-top: 1.2rem;
-        input {
-          background: #fff;
-          color: #000;
-          width: 100%;
-          border: 1px solid #ccc;
-          border-radius: 8px;
-          height: 3rem;
-          line-height: 3rem;
+          height: 1rem;
         }
       }
     }

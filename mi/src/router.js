@@ -8,6 +8,7 @@ import HomePage from "./view/HomePage/index.vue";
 import Goodsdetail from './components/Goodsdetail.vue'
 import Login from './components/Login.vue';
 import Register from './components/Register';
+import GoodsComputer from "./components/GoodsComputer.vue";
 
 Vue.use(Router);
 const router=new Router({
@@ -42,17 +43,21 @@ const router=new Router({
             redirect: '/HomePage/firstPage' //当路径为空时 /film/sort为默认页面
         },
         {
-            path:'/goodsdetail',
-            component:Goodsdetail
-        },
-        {
             path:'/login',
             component:Login
         },
         {
             path:'/register',
             component:Register
-        }
+        },
+        {
+            path:'/goodsdetail',
+            component:Goodsdetail
+        },
+        {
+            path:'/goodsComputer',
+            component:GoodsComputer
+        },
     ]
 })
 export default router;

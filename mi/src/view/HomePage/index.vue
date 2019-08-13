@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app3">
         <header>
              <div class="logo_header">
                 <span class="iconfont icon-mi"></span>
@@ -7,8 +7,11 @@
                     <span class="iconfont icon-suosou"></span>
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
-                <span class="iconfont icon-wode4"></span>
-                <router-link to="/login">登录</router-link>
+                
+                <router-link to="/login">
+                    <span class="iconfont icon-wode4" id="lo_btn">登录</span>
+                    <!-- <span class="iconfont icon-wode4" v-else>{{this.$store.state.tel}}</span> -->
+                </router-link>
             </div>
         </header>
         <main>
@@ -19,13 +22,13 @@
           <footer>
             <div>
                 <router-link to="/HomePage/firstPage" activeClass="active" tag="p">
-                    <span class="iconfont icon-shouyefanhuishouye"></span>首页
+                    <span class="iconfont icon-tab-0"></span>首页
                 </router-link>
             </div>
             <div>
                 
                 <router-link to="/HomePage/sort" activeClass="active" tag="p">
-                     <span class="iconfont icon-wsdzb_zbgzt_xxzx_newpxb_type"></span> 分类
+                     <span class="iconfont icon-icon"></span> 分类
                 </router-link>
                
             </div>
@@ -49,35 +52,26 @@
 
 
 export default {
-    data(){
-        return{
-            mothods:{
-                // login(){
-
-                // }
-            }
+    components:{
+       
+    },
+    mounted(){
+        let btn=document.getElementById('lo_btn');
+        if(window.sessionStorage.tel){
+            btn.innerHTML=window.sessionStorage.tel;
         }
+        // if(this.$store.state.tel){
+        //     console.log(this.$store.state.tel)
+        //     btn.innerHTML = this.$store.state.tel;
+        // }else{
+
+        // }
     }
 }
 </script>
 
-<style lang="scss" scoped>
-    html {
-    font-size: -webkit-calc(100vw/7.5);
-    font-size: calc(100vw / 7.5);
-
-    }
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-    a{
-        text-decoration: none;
-        color:grey;
-    }
-   
-    #app {
+<style lang="scss" >
+    #app3 {
     width: 100vw;
     height: 100vh;
     display: -webkit-flex;
@@ -85,36 +79,41 @@ export default {
     flex-direction: column;
         header{
             width: 100%;
-            height: 2.5rem;
+            // height: 2.5rem;
             background: #f2f2f2;
               .logo_header{
                 width: 100%;
-                height: 3rem;
+                height: 0.9rem;
                 text-align: center;
                 color: gray;
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
+                    .icon-wode4{
+                        color: #999;
+                    }
                     .icon-mi{
                         color: rgb(237, 91, 0);
-                        font-size: 1.5rem;
+                        font-size: .5rem;
                     }
                     .search{
                         background:#fff;
                         padding-left:10px;
-                        height: 2rem;
+                        height: 0.6rem;
+                        width:70%;
                         display:flex;
                         align-items: center;
                         input{
                             color:rgba(0,0,0,.3);
                             border: 0;
-                            width: 13rem;
-                            height: 1.5rem;
+                            // width: 90%;
+                            height:0.6rem;
                             padding:0.2rem;
                             outline:none;
                         }
                     }
                 }
+            
         }
          main{
             flex: 1;
@@ -122,20 +121,19 @@ export default {
         }
          footer{
             width: 100%;
-            height: 3rem;
+            // height: 2rem;
             display: flex;
             justify-content: space-around;
             div{
                 text-align: center;
                 display: block;
                 width: 25%;
-                height: 3rem;
-                font-size: 15px;
+                font-size: 12px;
                 color: #999;
                 span{
                     display: block;
                     margin: 6px 0;
-                    font-size: 1rem;
+                    font-size: 0.5rem;
                 }
                 .active{
                     color: orange;
@@ -145,8 +143,6 @@ export default {
      
     }
    
-   
-  
 </style>
 
 
