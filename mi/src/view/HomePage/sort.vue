@@ -8,41 +8,13 @@
         <div class="nav">
             <div class="left_menu">
                 <ul>
-                    <li class="active" ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li ref="lis">新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
+                    <li class="lis" ref="lis" :class="{'active' : currentIndex  === index}"  v-for="(item,index) of nav" :key="item.id" @click="changeLi(index)" v-text="item.nav_name"></li>
+                    <!-- <li class="lis" ref="lis" :class="{active:item == activeItem}"  v-for="item of nav" :key="item.id" @click="changeLi(item,index)">{{item.nav_name}}</li> -->
                 </ul>
             </div>
-            <div class="right_content">
-                <div class="sub">sub1</div>
-                <div class="sub">sub2</div>
-                <div class="sub">sub3</div>
-                <div class="sub">sub4</div>
-                <div class="sub">sub5</div>
-                <div class="sub">sub6</div>
-                <div class="sub">sub7</div>
+            <div class="right_content" v-for="(item,index) of phones" :key="item.id">
+                <img :src="item.phone_img" alt="">
+                <div class="sub" :class="{'content_active' : currentIndex === index}">{{item.phone_name}}</div>
             </div>
         </div>
     </div>
@@ -52,18 +24,35 @@
 export default {
     data(){
         return{
-        //    phones:[
-        //        {phone_id:'01',phone_name:'小米cc9',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'04',phone_name:'小米9',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../assets/p2.png')},
-        //        {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../assets/p2.png')},
-        //    ]
+            activeItem:null,
+            currentIndex:0,
+            nav:[
+                {nav_id:'01',nav_name:'新品'},
+                {nav_id:'02',nav_name:'众筹'},
+                {nav_id:'03',nav_name:'手机'},
+                {nav_id:'04',nav_name:'电视'},
+                {nav_id:'05',nav_name:'电脑'},
+                {nav_id:'06',nav_name:'智能'},
+                {nav_id:'07',nav_name:'家用电器'},
+            ],
+            phones:[
+                {phone_id:'01',phone_name:'小米cc9',phone_img:require('../../assets/p2.png')},
+                {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../../assets/p2.png')},
+                {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../../assets/p2.png')},
+                {phone_id:'04',phone_name:'小米9',phone_img:require('../../assets/p2.png')},
+                {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../../assets/p2.png')},
+                {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../../assets/p2.png')},
+                {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../../assets/p2.png')}
+            ]
         }
     },
-    mothods:{
+    methods:{
+        changeLi($index){
+        //   let lis = this.$refs.lis;
+        //   console.log(lis);
+            this.currentIndex = $index;
+
+        }
         
     }
 }
@@ -89,22 +78,26 @@ export default {
 
         .nav{
             background: #fefefe;
+            width:100%;
             .left_menu{
                 position:fixed;
                 top:3rem;
                 bottom:3rem;
                 left:0;
-                width:5rem;
+                width:20%;
                 border-right: 1px solid #efefef;
                 overflow-y: scroll; 
                 overflow-x: hidden;
                 ul{
-                    padding:0.2rem 0.4rem 0.3rem 0;
+                    padding:0.2rem 0rem 0.3rem 0;
                     overflow-y: scroll;           
                     li{
                         height:3rem;
                         line-height: 3rem;
                         text-align: center;
+                    }
+                    .lis{
+                        color:#3c3c3c;
                         font-size:12px;
                     }
                     .active{
@@ -114,8 +107,16 @@ export default {
                 }
             }
             .right_content{
-                background-color: #000;
-                float: right;
+                position: absolute;
+                left:20%;
+                top:3rem;
+                width:80%;
+            }
+            .sub{
+                display:none;
+            }
+            .content_active{
+                display: block;
             }
         }
 </style>
