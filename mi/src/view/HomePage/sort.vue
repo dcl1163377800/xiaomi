@@ -8,7 +8,13 @@
         <div class="nav">
             <div class="left_menu">
                 <ul>
-                    <li class="active">新品</li>
+                    <li class="active" ref="lis">新品</li>
+                    <li ref="lis">新品</li>
+                    <li ref="lis">新品</li>
+                    <li ref="lis">新品</li>
+                    <li ref="lis">新品</li>
+                    <li ref="lis">新品</li>
+                    <li ref="lis">新品</li>
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
@@ -18,11 +24,6 @@
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
-                    <li>新品</li><li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-                    <li>新品</li>
-
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
@@ -30,12 +31,19 @@
                     <li>新品</li>
                     <li>新品</li>
                     <li>新品</li>
-                    <li>新品</li><li>新品</li>
                     <li>新品</li>
-
+                    <li>新品</li>
                 </ul>
             </div>
-            <div class="right_content"></div>
+            <div class="right_content">
+                <div class="sub">sub1</div>
+                <div class="sub">sub2</div>
+                <div class="sub">sub3</div>
+                <div class="sub">sub4</div>
+                <div class="sub">sub5</div>
+                <div class="sub">sub6</div>
+                <div class="sub">sub7</div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,13 +52,19 @@
 export default {
     data(){
         return{
-           
+           phones:[
+               {phone_id:'01',phone_name:'小米cc9',phone_img:require('../assets/p2.png')},
+               {phone_id:'02',phone_name:'小米cc9e',phone_img:require('../assets/p2.png')},
+               {phone_id:'03',phone_name:'小米cc9e 美图版',phone_img:require('../assets/p2.png')},
+               {phone_id:'04',phone_name:'小米9',phone_img:require('../assets/p2.png')},
+               {phone_id:'05',phone_name:'小米9 SE',phone_img:require('../assets/p2.png')},
+               {phone_id:'06',phone_name:'小米Redmi 7',phone_img:require('../assets/p2.png')},
+               {phone_id:'07',phone_name:'小米Redmi 7A',phone_img:require('../assets/p2.png')},
+           ]
         }
     },
     mothods:{
-        changeColor(){
-            
-        }
+        
     }
 }
 </script>
@@ -82,15 +96,11 @@ export default {
                 left:0;
                 width:5rem;
                 border-right: 1px solid #efefef;
-                // overflow: hidden;
                 overflow-y: scroll; 
                 overflow-x: hidden;
                 ul{
                     padding:0.2rem 0.4rem 0.3rem 0;
-                    overflow-y: scroll; 
-                    // top: 1rem;
-                    // bottom: 1rem;
-                    // position: fixed;             
+                    overflow-y: scroll;           
                     li{
                         height:3rem;
                         line-height: 3rem;
@@ -103,6 +113,9 @@ export default {
                     }
                 }
             }
-             
+            .right_content{
+                background-color: #000;
+                
+            }
         }
 </style>

@@ -164,7 +164,7 @@ export default {
   },
   methods:{
     buy(res){
-      // console.log(res);
+      console.log(res);
       this.$router.push({
         path:'/goodsdetail',
         query:{

@@ -7,7 +7,8 @@
                     <span class="iconfont icon-suosou"></span>
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
-                <span class="iconfont icon-wode4">登录</span>
+                <span class="iconfont icon-wode4"></span>
+                <router-link to="/login">登录</router-link>
             </div>
         </header>
         <main>
@@ -18,7 +19,7 @@
           <footer>
             <div>
                 <router-link to="/HomePage/firstPage" activeClass="active" tag="p">
-                    <span class="iconfont icon-shouyeweixuanzhong"></span>首页
+                    <span class="iconfont icon-shouyefanhuishouye"></span>首页
                 </router-link>
             </div>
             <div>
@@ -48,8 +49,15 @@
 
 
 export default {
-    components:{
+    data(){
+        return{
+            mothods:{
+                // login(){
+
+                // }
+            }
         }
+    }
 }
 </script>
 
@@ -63,6 +71,10 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    }
+    a{
+        text-decoration: none;
+        color:grey;
     }
    
     #app {
