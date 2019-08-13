@@ -117,23 +117,36 @@ import Swiper from "./swiper";
 import Telswiper from "./Telswiper";
 import Phonefirst from "../components/phone/Phonefirst";
 import phonesecond from '../components/phone/Phonesecone';
+import axios from 'axios';
 export default {
   data() {
     return {
       selected: "1",
       watchList:[
-        {w_id:'01',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'01',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+        // {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
       ],
        computerList:[
-        {c_id:'001',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        {c_id:'002',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        {c_id:'003',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        {c_id:'004',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'001',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'002',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'003',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
+        // {c_id:'004',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
       ]
     }
+  },
+  mounted(){
+    axios.get('/products').then((res)=>{
+      console.log(111)
+        let watchList=res.data.products.watchList;
+        console.log(watchList)
+
+        watchList.forEach((item)=>{
+          console.log(item)
+          this.watchList.push(item);
+        })
+    })
   },
   methods:{
       buy(res){

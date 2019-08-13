@@ -35,15 +35,15 @@ export default {};
       text-align: center;
       // margin-bottom: 1rem;
       img {
-        width: 96%;
+        width: 98%;
       }
     }
     .info_bwf {
       padding-top: 0.1rem;
       background: #fff;
-      width: 96%;
-      margin: 0 2%;
-
+      width: 98%;
+      margin-left: 1%;
+      padding: 1% 2%;
       .bwf1 {
         display: flex;
         align-items: center;
@@ -78,6 +78,7 @@ export default {};
            color:white;
            height: 0.6rem;
            line-height: 0.6rem;
+           margin-left: 5%;
         }
       }
     }

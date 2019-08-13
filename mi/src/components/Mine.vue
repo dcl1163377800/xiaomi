@@ -6,8 +6,20 @@
             <img src="https://m.mi.com/static/img/avatar.76a75b8f17.png" alt="">
         </i>
         <div class="head_log_reg">
-          <span class="login">登录/</span>
-          <span class="reg">注册</span>
+          <!-- <router-link to="/login">登录</router-link>
+          <router-link to="/register">/注册</router-link> -->
+          <span @click="writeMessageShow=true">登录/注册</span>
+            <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageFun($event) " ref="shadow">
+            　　<div class="messageMaskContent" ref="msk">
+                  <span>协议声明</span>
+                  <p>《小米商城用户协议》《账号协议》《隐私政策》</p>
+                  <p>请您仔细阅读以上协议，其中有对您权利义务的特别约定等重要条款，同意后方可使用本软件</p>
+                 <div class="yuedu">
+                    <span @click="writeMessageShow=false">不同意</span>
+                    <router-link to="/login" tag="span">同意</router-link>
+                 </div>
+            　　</div>
+            </div>
         </div>
       </div>
     </div>
@@ -25,7 +37,6 @@
         <li>
           <div class="box">
             <i class="iconfont icon-daifukuan"></i>
-
             <p>代付款</p>
           </div>
         </li>
@@ -81,7 +92,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data () {
+  　　return {
+  　　　　writeMessageShow: false
+  　　}
+  },
+
+methods: {
+　　writeMessageFun (ev) {
+// 　　　　if (!this.$refs.msk.contains(ev.target)) {
+// 　　　　　　this.writeMessageShow = false;
+// 　　　　}
+　　}
+}
+};
 </script>
 <style lang="scss" scoped>
 .head {
@@ -90,8 +115,9 @@ export default {};
   position: fixed;
   left: 0;
   top: 0;
+  height: 1.5rem;
   .middle {
-    line-height: 1.5rem;
+    // line-height: 1.5rem;
     display: flex;
     align-items: left;
     margin-left: 2%;
@@ -106,6 +132,63 @@ export default {};
     .head_log_reg {
       color: white;
       font-size: 0.34rem;
+      margin-top: 0.5rem;
+      .wmassageMask{
+          position: fixed;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: rgba(0,0,0,.3);
+          z-index: 101;
+          .messageMaskContent{
+            position: absolute;
+            bottom: 4rem;
+            left: 2%;
+            right: 2%;
+            width: 96%;
+            background-color: #fff;
+            border-radius: 0.2rem;
+            color: black;
+            .yuedu{
+              display: flex;
+              // justify-content: space-between;
+              align-items: center;
+              span{
+                display: block;
+                padding: 4% 11%;
+                border:1px solid gray;
+                margin-top: 8%;
+                border:1px solid #f5f5f5;
+                color: gray;
+              }
+               span:nth-child(1){
+                display: block;
+                margin-left: 14%;
+              }
+               span:nth-child(2){
+                 color: #f37d0f;
+               }
+            }
+            span{
+              display: block;
+               text-align: center;
+            }
+              p:nth-child(2){
+                margin-top: 3%;
+                padding: 0 12%;
+                font-size: 0.25rem;
+                color: orange;
+                font-weight: 500;
+                }
+                 p:nth-child(3){
+                    font-size: 0.25rem;
+                    padding: 2% 12%;
+                    font-weight: 500;
+                    color: gray;
+                }
+            }
+          }
       a{
           color: white;
       }
@@ -114,7 +197,6 @@ export default {};
 }
 section {
   width: 100%;
-  // background:greenyellow;
   margin-top: 1.2rem;
   border-bottom: 1px solid #f2f2f2;
   .section_middle {
