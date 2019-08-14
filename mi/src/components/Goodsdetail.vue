@@ -2,7 +2,7 @@
 <!-- <div> -->
     <!-- <div class="menu"></div> -->
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in songList" :key="goods.w_id">
+        <div class="goods_detail" v-for="goods in songList" :key="goods.gID" >
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -10,19 +10,19 @@
                 </div>
                 <mt-swipe :auto="4000" style="height:8rem;width:100%">
                     <mt-swipe-item>
-                        <img :src="goods.w_img" alt="" style="height:100%;width:100%">
+                        <img :src="goods.gImg1" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                     <mt-swipe-item>
-                        <img :src="goods.w_img2" alt="" style="height:100%;width:100%">
+                        <img id="img_src" :src="goods.gImg3" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                 </mt-swipe>
             </div>
             <div class="goods_content">
-                <p class="goods_name">{{goods.w_name}}</p>
-                <p class="goods_brief">{{goods.w_brief}}</p>
+                <p class="goods_name">{{goods.gContent}}</p>
+                <p class="goods_brief">{{goods.gBrief}}</p>
                 <div class="price">
-                    <span class="new_price">{{goods.new_price}}</span>
-                    <span class="old_price">{{goods.old_price}}</span>
+                    <span class="new_price" ref="p_price">￥{{goods.gewPrice}}</span>
+                    <span class="old_price">￥{{goods.gldPrice}}</span>
                 </div>
             </div>
             <div class="goods_param">
@@ -58,9 +58,10 @@
                 <div class="goods_info_content">
                     <div class="selected">
                         <span class="se_left">已选</span>
-                        <span>{{goods.w_name}}</span>
+                        <span @click="writeMessageShow=true">{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
                     </div>
+                    
                     <div class="address">
                         <span class="ad_left">送至</span>
                         <span>北京市 东城区</span>
@@ -77,6 +78,36 @@
                     </div>
                 </div>
             </div>
+            <!-- 点击弹出遮罩层 -->
+             <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageShow=false">
+            　　<div class="messageMaskContent" ref="msk">
+                    <div class="showList">
+                        <span>×</span>
+                    </div>
+                    <div class="side">
+                        <div class="img_">
+                            <img src="../assets/list1.jpg" alt="">
+                        </div>
+                        <div class="title_List">
+                            <span>￥999</span>
+                            <span>￥632</span>
+                            <p>Redmi Note 7 4GB+64GB 亮黑色的数据大姐大傻傻</p>
+                        </div>
+                    </div>
+                    <div class="banben">
+                        <span>版本</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>43英寸</span>
+                    </div>
+                    <div class="banben">
+                        <span>颜色</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>黑色</span>
+                    </div>
+            　　</div>
+             </div>
             <!-- 评论 -->
             <div class="comment">
                 <div class="person">
@@ -151,9 +182,10 @@ export default {
     name:'goodsdetail',
     data(){
         return{
+            writeMessageShow: false,
             currentIndex:0,
             songList:[
-                {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+                //{w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
             ],
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
@@ -206,16 +238,19 @@ export default {
         }
     },
     mounted() {
-        
-        // axios.get('/aaa/bbb?wid=' + this.$route.query.w_id).then((res) => {
-        //     console.log(res.data);
-        // })
-        // service.getDetail(this.$route.query.w_id).then((res) => {
-        //     // this.songList = res.data;
-        //     console.log(res)
-        // })
+        console.log(this.$route);
+        axios.get('http://192.168.61.244:8080/XiaoMi/search?code=2&id=' + this.$route.query.id).then((res) => {
+            console.log(res.data);
+            this.songList.push(res.data);
+
+        })
     },
     methods:{
+        writeMessageFun (ev) {
+    // 　　　　if (!this.$refs.msk.contains(ev.target)) {
+    // 　　　　　　this.writeMessageShow = false;
+    // 　　　　}
+    　　},
         goback_index(){
             this.$router.go(-1);
         },
@@ -224,7 +259,15 @@ export default {
         },
         addShopCart(){
             
-        }
+        },
+        // addCar(){
+        //     console.log(this.$refs.p_name[0].innerText);
+        //     //  axios.get("http://192.168.61.244:8080/XiaoMi/insertGoods?userid=1&gname=2&gbrief=1&gnewprice=2&num=1&gId=3&gcolor=3").then((res) => {
+        //     // console.log(res.data);
+        //     // this.songList.push(res.data);
+
+        // // })
+        // }
     }
 }
 </script>
@@ -264,8 +307,6 @@ export default {
                 font-size:12px;
                 color:rgba(0,0,0,.54);
                 white-space: wrap;
-                // height:1rem;
-                // line-height: 1rem;
             }
             .price{
                 padding: 0.2rem 0;
@@ -304,13 +345,13 @@ export default {
                 }
             }
         }
-        .goods_info{
+        &>.goods_info{
             padding: 0 2%;
-            .goods_info_content{
+            &>.goods_info_content{
                 background-color: #fafafa;
                 border-radius:0.2rem;
                 border-bottom:1px solid rgb(245, 239, 239);
-                div{
+                &>div{
                     border-bottom:1px solid rgb(245, 239, 239);
                     height:1rem;
                     line-height:1rem;
@@ -326,10 +367,12 @@ export default {
                         display:inline-block;
                         margin-right:1rem;
                     }
-                    span:last-child{
-                        float:right;
+              
+                        span:last-child{
+                            float:right;
+                        }
                     }
-                }
+                      
                 .address{
                     .ad_left{
                         color: rgba(0,0,0,.54);
@@ -460,7 +503,89 @@ export default {
             }
         }
     }
-    
+    //点击弹出遮罩层
+    .wmassageMask{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0,0,0,.3);
+        z-index: 101;
+        .messageMaskContent{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            // transition: all 2s;
+            height: 10rem;
+            background-color: #fff;
+                .showList{
+                    width: 100%;
+                    text-align: right;
+                    span{
+                        font-size: 0.8rem;
+                        color: gray;
+                    }
+                }
+                .side{
+                    width: 100%;
+                    height: 2rem;
+                    display: flex;
+                    justify-content: center;
+                    padding: 0 3%;
+                    .img_{
+                        width: 30%;
+                        height: 2rem;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .title_List{
+                        width: 70%;
+                        span{
+                            margin-top: 4%;
+                            margin-left: 4%;
+                            display: inline-block;
+                        }
+                        span:nth-child(1){
+                            color: #ff6700;
+                            font-size: 0.5rem;
+                        }
+                         span:nth-child(2){
+                            color: gray;
+                            text-decoration: line-through;
+                        }
+                        p{
+                            color: #3c3c3c;
+                            width: 100%;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            margin-left: 4%;
+                            margin-top: 4%;
+                            font-size: 0.28rem;
+                        }
+                    }
+                }
+                .banben{
+                    margin-top: 2%;
+                    span{
+                        margin-left: 4%;
+                    }
+                }
+                .xinhao{
+                    span{
+                        display: inline-block;
+                        width: 1rem;
+                        border: 1px solid #ff6700;
+                        margin-left: 6%;
+                        margin-top: 4%;
+                        color: #ff6700;
+                    }
+                }
+            }
+
+        }
     .footer{
         position:fixed;
         bottom:0.1rem;

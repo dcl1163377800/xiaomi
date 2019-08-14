@@ -47,23 +47,22 @@ export default {
       let user_pwd=this.$refs.pwd_input.value;
       console.log(user_phone);
       var phone = /^1[3456789]\d{9}$/;
-        // console.log(this.$router)
       if(phone.test(user_phone)){
             axios.get(`http://192.168.61.244:8080/XiaoMi/login?tel=${user_phone}&password=${user_pwd}`).then((res)=>{
                 console.log(res.data)
                 if(res.data.code==1){
-                    let token=res.data.token
-                    window.sessionStorage.setItem('token',token)
-                    console.log(token)
+                    let token=res.data.token;
+                    window.sessionStorage.setItem('token',token);
+                    console.log(token);
                     this.$toast({
                         message: '登录成功',
                         iconClass: 'icon icon-success'
                     });
-                     this.$router.push('/')
+                     this.$router.push('/');
                     
 
                 }else{
-                    alert('用户名或密码不正确')
+                    alert('用户名或密码不正确');
                 }
             })
 

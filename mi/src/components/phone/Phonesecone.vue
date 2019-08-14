@@ -2,18 +2,15 @@
   <div class="phone_second">
         <span class="data_log" v-for="phone in phoneLlist" v-bind:key="phone.id">
         <div class="img1">
-            <img :src="phone.pImg" alt />
+            <img :src="phone.gImg" alt />
         </div>
         <div class="content">
-            <div class="phone_name">{{phone.pName}}</div>
-            <div class="phone_prief">{{phone.pBrief}}</div>
-            <div class="phone_price">￥{{phone.newPrice}}</div>
-            <!-- <div class="phone_oldPrice">￥{{phone.oldPrice}}</div> -->
+            <div class="phone_name">{{phone.gName}}</div>
+            <div class="phone_prief">{{phone.gBrief}}</div>
+            <div class="phone_price">￥{{phone.gewPrice}}</div>
             <button>立即预购</button>
         </div>
         </span>
-        
-    <!-- <a href="" class="data_log"></a> -->
   </div>
 </template>
 <script>
