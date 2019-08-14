@@ -1,6 +1,6 @@
 <template>
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in songList" :key="goods.gID">
+        <div class="goods_detail" v-for="goods in watchList" :key="goods.gID">
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -122,28 +122,10 @@
                 </div>
             </div>
         </div>
-        <detailfooter></detailfooter>
-        <!-- <div class="footer">
-            <div class="index">
-                <span class="iconfont icon-shouyefanhuishouye"></span>
-                <p>首页</p>
-                <router-link to="/">首页</router-link>
-            </div>
-            <div class="cart">
-                <span class="iconfont icon-qicheqianlian-1-copy"></span>
-                <p>购物车</p>
-                <router-link to="/HomePage/shoppingcar">购物车</router-link>
-                <span class="num"></span>
-            </div>
-            <div class="buying">
-                <button>加入购物车</button>
-                <span class="bool bool-animate" ref="bool"></span>
-            </div>
-        </div> -->
+        <detailfooter ></detailfooter>
     </div> 
 </template>
 <script>
-// import service from '../services/service';
 import detailfooter from './DetailFooter';
 import axios from 'axios';
 export default {
@@ -154,9 +136,7 @@ export default {
     data(){
         return{
             currentIndex:0,
-            songList:[
-                // {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-            ],
+            watchList:[],
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
                 {tab_id:'02',tab_title:'参数'},
@@ -207,22 +187,17 @@ export default {
             ]
         }
     },
+    methods:{
+
+    },
     mounted() {
-        console.log(this.$route.query.id)
         // code=1 手机
         // code=2 电视
         // code=3 笔记本
         // http://192.168.61.244:8080/XiaoMi/search?code=3&id=01
         axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=2&id=` + this.$route.query.id).then((res) => {
-            console.log(res.data);
-            this.songList.push(res.data);
+            this.watchList.push(res.data);
         })
-       
-        
-        // service.getDetail(this.$route.query.w_id).then((res) => {
-        //     // this.songList = res.data;
-        //     console.log(res)
-        // })
     },
     methods:{
         goback_index(){
@@ -231,9 +206,6 @@ export default {
         changeLi($index){
             this.currentIndex = $index;
         },
-        addShopCart(){
-            
-        }
     }
 }
 </script>

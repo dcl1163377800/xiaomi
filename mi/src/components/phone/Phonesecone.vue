@@ -26,7 +26,7 @@ export default {
   },
   methods:{
     phoneDetail(res){
-      console.log(res);
+      // console.log(res);
       this.$router.push({
         path:'/phonedetail',
         query:{
@@ -37,7 +37,7 @@ export default {
   },
   mounted(){
     axios.get('http://192.168.61.244:8080/XiaoMi/phone').then((res)=>{
-      console.log(res.data);
+      // console.log(res.data);
       this.phoneLlist = res.data;
     })
   }

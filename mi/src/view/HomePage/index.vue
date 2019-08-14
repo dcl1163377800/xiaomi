@@ -8,38 +8,32 @@
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
                 
-                <router-link to="/login">
-                    <span class="iconfont icon-wode4" id="lo_btn">登录</span>
+           
+                    <span class="iconfont icon-wode4" id="router_login" @click="login_span">登录</span>
                     <!-- <span class="iconfont icon-wode4" v-else>{{this.$store.state.tel}}</span> -->
-                </router-link>
             </div>
         </header>
         <main>
-            <router-view></router-view>
-           
-        </main>
-        
+            <router-view></router-view>        
+        </main>        
           <footer>
             <div>
                 <router-link to="/HomePage/firstPage" activeClass="active" tag="p">
                     <span class="iconfont icon-tab-0"></span>首页
                 </router-link>
             </div>
-            <div>
-                
+            <div>               
                 <router-link to="/HomePage/sort" activeClass="active" tag="p">
                      <span class="iconfont icon-icon"></span> 分类
                 </router-link>
                
             </div>
-            <div>
-                
+            <div>               
                 <router-link to="/HomePage/shoppingcar" activeClass="active" tag="p">
                     <span class="iconfont icon-icon4"></span>购物车
                 </router-link>
             </div>
-            <div>
-                
+            <div>               
                 <router-link to="/HomePage/myshoppingcar" activeClass="active" tag="p">
                      <span class="iconfont icon-wode4"></span>我的
                 </router-link>
@@ -50,23 +44,50 @@
 
 <script>
 
+import eventBus from '../../util/eventbus';
 
+function refresh() {
+    let router_login=document.getElementById('router_login')
+    // let icon_span=document.getElementById('icon_span')
+    // console.log(router_login)
+    if(window.sessionStorage.token){
+        router_login.innerHTML='已登录'
+        router_login.style.color='orange'
+    }else{
+        router_login.innerHTML='登录'
+        router_login.style.color='gray'
+        // this.$router.push('/login')
+    }
+}
 export default {
     components:{
        
     },
+    
     mounted(){
-        let btn=document.getElementById('lo_btn');
-        if(window.sessionStorage.tel){
-            btn.innerHTML=window.sessionStorage.tel;
-        }
-        // if(this.$store.state.tel){
-        //     console.log(this.$store.state.tel)
-        //     btn.innerHTML = this.$store.state.tel;
-        // }else{
+        refresh();
+        this._cancel = eventBus.$on('loginState', () => {
+            refresh();
+        });
+    },
 
-        // }
-    }
+    beforeDestory() {
+        this._cancel();
+    },
+
+    methods:{
+        
+        login_span(){
+            console.log(111666)
+            if(window.sessionStorage.token){
+                alert('用户已登录')
+            }else{
+                this.$router.push('/login')
+            }
+        }
+        
+    },
+   
 }
 </script>
 

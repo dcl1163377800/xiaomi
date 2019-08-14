@@ -14,7 +14,7 @@
                 <router-link to="/HomePage/shoppingcar">购物车</router-link>
             </div>
             <div class="buying">
-                <button>加入购物车</button>
+                <button @click="addToCart">加入购物车</button>
                 <span class="bool bool-animate" ref="bool"></span>
             </div>
         </div>
@@ -26,29 +26,18 @@ export default {
     name:'detailfooter',
     data(){
         return{
-            
-            message:3
-
+            message:null
         }
     },
     mounted(){
-        console.log(23123)
-        eventBus.$on('pass_total',(totalCount) => {
-
-            console.log(totalCount,999);
-            this.message=totalCount
-            console.log(this.message,8888)
-
-        //     var tag=document.getElementById('total_count');
-        //     console.log(tag)
-        //    tag.innerHTML = totalCount
-        })
+        let count_total=sessionStorage.getItem('totalcount');
+        this.message=count_total;    
     },
-    // beforeDestory() {
-    //     this._cancel('pass_total',()=>{
-    //         console.log('已经销毁该监听')
-    //     });
-    // },
+    methods:{
+        addToCart(){
+            
+        }
+    }
 
 }
 </script>

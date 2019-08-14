@@ -6,10 +6,13 @@
             <img src="https://m.mi.com/static/img/avatar.76a75b8f17.png" alt="">
         </i>
         <div class="head_log_reg">
-          <!-- <router-link to="/login">登录</router-link>
-          <router-link to="/register">/注册</router-link> -->
-          <span @click="writeMessageShow=true">登录/注册</span>
-            <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageFun($event) " ref="shadow">
+         
+          <span v-if='flag' @click="layout">退出</span>
+          <span v-else  @click="writeMessageShow=true" id="my_login">登录</span>
+         
+
+
+            <div class="wmassageMask" v-show="writeMessageShow " ref="shadow">
             　　<div class="messageMaskContent" ref="msk">
                   <span>协议声明</span>
                   <p>《小米商城用户协议》《账号协议》《隐私政策》</p>
@@ -92,20 +95,35 @@
 </template>
 
 <script>
+import eventBus from '../util/eventbus';
 export default {
     data () {
   　　return {
-  　　　　writeMessageShow: false
+  　　　　writeMessageShow: false,
+           flag:'',
   　　}
+  
   },
+    mounted(){
+      if(window.sessionStorage.token){
+        return this.flag=true;
+        location.reload();
+      }else{
+        return this.flag=false
+      }
+    },
 
-methods: {
-　　writeMessageFun (ev) {
-// 　　　　if (!this.$refs.msk.contains(ev.target)) {
-// 　　　　　　this.writeMessageShow = false;
-// 　　　　}
-　　}
-}
+    methods: {
+        layout(){
+          window.sessionStorage.token=''
+          eventBus.$emit('loginState');
+            this.$router.push('/');
+            // location.reload();
+        }
+
+    },
+
+
 };
 </script>
 <style lang="scss" scoped>

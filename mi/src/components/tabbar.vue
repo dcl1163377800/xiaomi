@@ -124,35 +124,20 @@ export default {
   data() {
     return {
       selected: "1",
-      watchList:[
-        // {w_id:'01',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        // {w_id:'02',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        // {w_id:'03',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-        // {w_id:'04',w_img:require('../assets/watch2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-      ],
-       computerList:[
-        // {c_id:'001',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        // {c_id:'002',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        // {c_id:'003',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-        // {c_id:'004',c_img:require('../assets/10.jpg'),com_name:'RedmiBook 14',com_title:'超轻薄全金属笔记本',price:'￥3199'},
-      ]
+      watchList:[],
+      computerList:[]
     }
   },
   mounted(){
-
     axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
-      console.log(res.data);
-      this.computerList = res.data;
-      
+      this.computerList = res.data;    
     });
     axios.get('http://192.168.61.244:8080/XiaoMi//Tv').then((res)=>{
-      console.log(res.data);
       this.watchList = res.data;
     })
   },
   methods:{
     buy(res){
-      console.log(res);
       this.$router.push({
         path:'/goodsdetail',
         query:{
@@ -161,7 +146,6 @@ export default {
       })
     },
     computerBy(result){
-      console.log(result);
       this.$router.push({
         path:"/goodsComputer",
         query:{

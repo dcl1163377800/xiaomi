@@ -25,7 +25,8 @@
         </form>
         <div class="reg">
           <span>还没有账号,立即</span>
-          <router-link to="/register">注册</router-link>
+          <router-link to="/register">注册</router-link>/
+          <router-link to="/resetkey">修改密码</router-link>
         </div>
       </div>
     </div>
@@ -54,10 +55,12 @@ export default {
                     let token=res.data.token
                     window.sessionStorage.setItem('token',token)
                     console.log(token)
-                    if(confirm('登录成功,是否去购物')){
-                      
-                        this.$router.push('/')
-                    }
+                    this.$toast({
+                        message: '登录成功',
+                        iconClass: 'icon icon-success'
+                    });
+                     this.$router.push('/')
+                    
 
                 }else{
                     alert('用户名或密码不正确')

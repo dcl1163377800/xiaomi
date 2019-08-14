@@ -12,6 +12,8 @@ import GoodsComputer from "./components/GoodsComputer.vue";
 import Account from './components/Account.vue';
 import PhoneDetail from './components/phone/PhoneDetail.vue'
 import DetailFooter from './components/DetailFooter';
+import Resetkey from "./components/Resetkey";
+
 
 Vue.use(Router);
 const router=new Router({
@@ -74,6 +76,11 @@ const router=new Router({
         {
             path:'/detailfooter',
             component:DetailFooter
+        },
+        {
+            path:"/resetkey",
+            component:Resetkey
+
         }
     ]
 })
