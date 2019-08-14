@@ -7,7 +7,7 @@
         </i>
         <div class="head_log_reg">
          
-          <span v-if='flag' @click="layout"><a href="">退出</a></span>
+          <span v-if='flag' @click="layout">退出</span>
           <span v-else  @click="writeMessageShow=true" id="my_login">登录</span>
          
 
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+import eventBus from '../util/eventbus';
 export default {
     data () {
   　　return {
@@ -112,13 +113,15 @@ export default {
       }
     },
 
-methods: {
-layout(){
-  window.sessionStorage.token=''
-    this.$router.push('/')
-}
+    methods: {
+        layout(){
+          window.sessionStorage.token=''
+          eventBus.$emit('loginState');
+            this.$router.push('/');
+            // location.reload();
+        }
 
-},
+    },
 
 
 };

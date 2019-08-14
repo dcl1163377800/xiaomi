@@ -49,24 +49,37 @@
 
 <script>
 
+import eventBus from '../../util/eventbus';
 
+function refresh() {
+    let router_login=document.getElementById('router_login')
+    // let icon_span=document.getElementById('icon_span')
+    console.log(router_login)
+    if(window.sessionStorage.token){
+        router_login.innerHTML='已登录'
+        router_login.style.color='orange'
+    }else{
+        router_login.innerHTML='登录'
+        router_login.style.color='gray'
+        // this.$router.push('/login')
+    }
+}
 export default {
     components:{
        
     },
+    
     mounted(){
-        let router_login=document.getElementById('router_login')
-        // let icon_span=document.getElementById('icon_span')
-        console.log(router_login)
-        if(window.sessionStorage.token){
-            router_login.innerHTML='已登录'
-            router_login.style.color='orange'
-        }else{
-            router_login.innerHTML='登录'
-            router_login.style.color='gray'
-            // this.$router.push('/login')
-        }
+        refresh();
+        this._cancel = eventBus.$on('loginState', () => {
+            refresh();
+        });
     },
+
+    beforeDestory() {
+        this._cancel();
+    },
+
     methods:{
         
         login_span(){
