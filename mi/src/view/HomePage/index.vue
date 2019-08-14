@@ -8,10 +8,9 @@
                     <input type="text" placeholder="请搜索商品名称"/>
                 </div>
                 
-                <router-link to="/login">
-                    <span class="iconfont icon-wode4" id="lo_btn">登录</span>
+           
+                    <span class="iconfont icon-wode4" id="router_login" @click="login_span">登录</span>
                     <!-- <span class="iconfont icon-wode4" v-else>{{this.$store.state.tel}}</span> -->
-                </router-link>
             </div>
         </header>
         <main>
@@ -56,17 +55,31 @@ export default {
        
     },
     mounted(){
-        let btn=document.getElementById('lo_btn');
-        if(window.sessionStorage.tel){
-            btn.innerHTML=window.sessionStorage.tel;
+        let router_login=document.getElementById('router_login')
+        // let icon_span=document.getElementById('icon_span')
+        console.log(router_login)
+        if(window.sessionStorage.token){
+            router_login.innerHTML='已登录'
+            router_login.style.color='orange'
+        }else{
+            router_login.innerHTML='登录'
+            router_login.style.color='gray'
+            // this.$router.push('/login')
         }
-        // if(this.$store.state.tel){
-        //     console.log(this.$store.state.tel)
-        //     btn.innerHTML = this.$store.state.tel;
-        // }else{
-
-        // }
-    }
+    },
+    methods:{
+        
+        login_span(){
+            console.log(111666)
+            if(window.sessionStorage.token){
+                alert('用户已登录')
+            }else{
+                this.$router.push('/login')
+            }
+        }
+        
+    },
+   
 }
 </script>
 

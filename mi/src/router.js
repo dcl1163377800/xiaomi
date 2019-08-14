@@ -9,6 +9,7 @@ import Goodsdetail from './components/Goodsdetail.vue'
 import Login from './components/Login.vue';
 import Register from './components/Register';
 import GoodsComputer from "./components/GoodsComputer.vue";
+import Resetkey from "./components/Resetkey";
 
 Vue.use(Router);
 const router=new Router({
@@ -58,6 +59,10 @@ const router=new Router({
             path:'/goodsComputer',
             component:GoodsComputer
         },
+        {
+            path:"/resetkey",
+            component:Resetkey
+        }
     ]
 })
 export default router;
