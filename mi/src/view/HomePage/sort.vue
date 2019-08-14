@@ -22,10 +22,15 @@
       </div>
       <div class="right_content">
         <div class="sub" :class="{'content_active' : currentIndex === index}" v-for="(item,index) of phones" :key="item.id">
-          <div class="smallImg" v-for="(img,index) in item.phone_img" :key="index">
-            <img :src="img.img1" alt />
-            <div class="Phone_name">{{item.phone_name}}</div>
-          </div>
+            <div class="phoneLi">
+                 <span>--  手机  --</span>
+             </div>
+             <div class="flexed">
+                <div class="smallImg" v-for="(img,index) in item.phone_img" :key="index">
+                    <img :src="img.img1" alt />
+                    <div class="Phone_name">{{item.phone_name}}</div>
+                </div>
+             </div>
         </div>
       </div>
     </div>
@@ -142,27 +147,35 @@ export default {
     left: 20%;
     top: 1rem;
     width: 80%;
+    text-align: center;
+    margin-top: 1.5rem;
+    .phoneLi{
+        font-size: 0.3rem;
+    }
   }
   .sub {
     display: none;
+    .phoneLi{
+        margin-bottom: 0.5rem;
+    }
   }
   .content_active {
     display: block;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    .smallImg {
-      width: 30%;
-      text-align: center;
-      img {
-        width: 100%;
-      }
-      .Phone_name {
-    }
-      // display: flex;
-      // justify-content: space-around;
-    }
-    
+    .flexed{
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+          .smallImg {
+            width: 30%;
+            img {
+                width: 100%;
+            }
+            .Phone_name {
+                color: #999;
+             }
+        }
+    }   
   }
 }
 </style>
+

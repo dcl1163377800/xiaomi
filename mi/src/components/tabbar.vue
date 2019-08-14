@@ -117,7 +117,9 @@ import Swiper from "./swiper";
 import Telswiper from "./Telswiper";
 import Phonefirst from "../components/phone/Phonefirst";
 import phonesecond from '../components/phone/Phonesecone';
-import axios from 'axios'; 
+
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -137,6 +139,7 @@ export default {
     }
   },
   mounted(){
+
     axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
       console.log(res.data);
       this.computerList = res.data;

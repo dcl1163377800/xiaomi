@@ -42,9 +42,8 @@ export default {};
       padding-top: 0.1rem;
       background: #fff;
       width: 98%;
-      margin-left:  1%;
-      padding:1% 2%;
-
+      margin-left: 1%;
+      padding: 1% 2%;
       .bwf1 {
         display: flex;
         align-items: center;
