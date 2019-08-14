@@ -1,6 +1,6 @@
 <template>
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in songList" :key="goods.gID">
+        <div class="goods_detail" v-for="goods in phoneList" :key="goods.gID">
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -20,7 +20,7 @@
                 <p class="goods_brief">{{goods.gBrief}}</p>
                 <div class="price">
                     <span class="new_price">{{goods.gewPrice}}元</span>
-                    <span class="old_price">{{goods.gldPrice}}元</span>
+                    <span class="old_price">{{goods.gldPrice}}</span>
                 </div>
             </div>
             <div class="goods_param">
@@ -80,7 +80,7 @@
                 <div class="person">
                     <!-- <span class="iconfont icon-wode"></span> -->
                     <div class="per_photo">
-                        <img src="../assets/12.png" alt="">
+                        <img src="../../assets/12.png" alt="">
                     </div>                   
                     <div class="per">
                         <p class="per_name">韩商言</p>
@@ -123,40 +123,20 @@
             </div>
         </div>
         <detailfooter></detailfooter>
-        <!-- <div class="footer">
-            <div class="index">
-                <span class="iconfont icon-shouyefanhuishouye"></span>
-                <p>首页</p>
-                <router-link to="/">首页</router-link>
-            </div>
-            <div class="cart">
-                <span class="iconfont icon-qicheqianlian-1-copy"></span>
-                <p>购物车</p>
-                <router-link to="/HomePage/shoppingcar">购物车</router-link>
-                <span class="num"></span>
-            </div>
-            <div class="buying">
-                <button>加入购物车</button>
-                <span class="bool bool-animate" ref="bool"></span>
-            </div>
-        </div> -->
     </div> 
 </template>
 <script>
-// import service from '../services/service';
-import detailfooter from './DetailFooter';
 import axios from 'axios';
+import detailfooter from '../DetailFooter';
 export default {
-    name:'goodsdetail',
+    name:'phonedetail',
     components:{
         detailfooter
     },
     data(){
         return{
+            phoneList:[],
             currentIndex:0,
-            songList:[
-                // {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-            ],
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
                 {tab_id:'02',tab_title:'参数'},
@@ -207,22 +187,11 @@ export default {
             ]
         }
     },
-    mounted() {
-        console.log(this.$route.query.id)
-        // code=1 手机
-        // code=2 电视
-        // code=3 笔记本
-        // http://192.168.61.244:8080/XiaoMi/search?code=3&id=01
-        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=2&id=` + this.$route.query.id).then((res) => {
+    mounted(){
+        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=1&id=` + this.$route.query.id).then((res) => {
             console.log(res.data);
-            this.songList.push(res.data);
+            this.phoneList.push(res.data);
         })
-       
-        
-        // service.getDetail(this.$route.query.w_id).then((res) => {
-        //     // this.songList = res.data;
-        //     console.log(res)
-        // })
     },
     methods:{
         goback_index(){
@@ -238,7 +207,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-    .menu{
+     .menu{
         position: fixed;
         top: 0;
         width: 100%;
@@ -470,39 +439,5 @@ export default {
         }
     }
     
-    // .footer{
-    //     position:fixed;
-    //     bottom:0.1rem;
-    //     left:0.2rem;
-    //     right:0.2rem;
-    //     box-shadow: 1px 1px 2px 1px #ccc;
-    //     border-radius:15px;
-    //     height:1rem;
-    //     z-index: 1;
-    //     background-color: #fff;
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: space-around;
-    //     .index, .cart{
-    //         text-align: center;
-    //         a{
-    //             color: rgba(0,0,0,.54);
-    //             font-size:12px;
-    //             display:block;
-    //         }
-    //     }
-    //     .buying{
-    //         button{
-    //             color:#fff;
-    //             width:2rem;
-    //             height:0.7rem;
-    //             background:#ff6700;
-    //             border-radius:30px;
-    //             border:0;
-    //             font-size:14px;
-    //             outline:none;
-    //         }
-    //     }
-    // }
-    
+   
 </style>

@@ -36,16 +36,16 @@
               </div>
             </div>
             <div class="watch2">
-              <div class="watch_list" v-for="item of watchList" :key="item.w_id" @click="buy(item.tId)"> 
+              <div class="watch_list" v-for="item of watchList" :key="item.w_id" @click="buy(item.gID)"> 
                 <div class="w1">
-                  <img :src="item.tImg" alt="">
+                  <img :src="item.gImg" alt="">
                 </div>
                 <div class="w2">        
-                  <p class="watch_name">{{item.tName}}</p>
-                  <p class="watch_brief">{{item.t_brief}}</p>
+                  <p class="watch_name">{{item.gName}}</p>
+                  <p class="watch_brief">{{item.gbrief}}</p>
                   <p class="watch_price">
-                    <span class="new_price">{{item.newPrice}}</span>
-                    <span class="old_price">{{item.oldPrice}}</span>
+                    <span class="new_price">{{item.gewPrice}}</span>
+                    <span class="old_price">{{item.gldPrice}}</span>
                   </p>
                   <button class="buy">立即购买</button>
                 </div>              
@@ -96,14 +96,14 @@
               </div>
           </div>
           <div class="listWrap">
-              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.lID)">
+              <div class="box" v-for="computer in computerList" :key="computer.gID" @click="computerBy(computer.gID)">
                   <div class="imgList">
-                      <img :src="computer.lImg" alt="">
+                      <img :src="computer.gImg" alt="">
                   </div>
                   <div class="list2">
-                      <p>{{computer.lName}}</p>
-                      <p>{{computer.lBrief}}</p>
-                      <p>￥{{computer.newPrice}}起</p>
+                      <p>{{computer.gName}}</p>
+                      <p>{{computer.gBrief}}</p>
+                      <p>￥{{computer.gewPrice}}起</p>
                       <button>立即预定</button>
                   </div>
               </div>

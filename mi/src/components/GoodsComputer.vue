@@ -2,7 +2,7 @@
 <div>
     <div class="menu"></div>
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in songList" :key="goods.w_id">
+        <div class="goods_detail" v-for="goods in computerList" :key="goods.w_id">
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -10,19 +10,19 @@
                 </div>
                 <mt-swipe :auto="4000" style="height:8rem;width:100%">
                     <mt-swipe-item>
-                        <img :src="goods.w_img" alt="" style="height:100%;width:100%">
+                        <img :src="goods.gImg" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                     <mt-swipe-item>
-                        <img :src="goods.w_img2" alt="" style="height:100%;width:100%">
+                        <img :src="goods.gImg1" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                 </mt-swipe>
             </div>
             <div class="goods_content">
-                <p class="goods_name">{{goods.w_name}}</p>
-                <p class="goods_brief">{{goods.w_brief}}</p>
+                <p class="goods_name">{{goods.gName}}</p>
+                <p class="goods_brief">{{goods.gBrief}}</p>
                 <div class="price">
-                    <span class="new_price">{{goods.new_price}}</span>
-                    <span class="old_price">{{goods.old_price}}</span>
+                    <span class="new_price">{{goods.gewPrice}}</span>
+                    <span class="old_price">{{goods.gldPrice}}</span>
                 </div>
             </div>
             <div class="goods_param">
@@ -58,7 +58,7 @@
                 <div class="goods_info_content">
                     <div class="selected">
                         <span class="se_left">已选</span>
-                        <span>{{goods.w_name}}</span>
+                        <span>{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
                     </div>
                     <div class="address">
@@ -99,25 +99,21 @@
     </div> 
 </template>
 <script>
-// import service from '../services/service';
+import axios from 'axios';
 export default {
     name:'goodsdetail',
     data(){
         return{
-            songList:[
-                {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
+            computerList:[
+                // {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
             ]
         }
     },
     mounted() {
-        
-        // axios.get('/aaa/bbb?wid=' + this.$route.query.w_id).then((res) => {
-        //     console.log(res.data);
-        // })
-        // service.getDetail(this.$route.query.w_id).then((res) => {
-        //     // this.songList = res.data;
-        //     console.log(res)
-        // })
+        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=3&id=` + this.$route.query.id).then((res) => {
+            console.log(res.data);
+            this.computerList.push(res.data);
+        })
     },
     methods:{
         goback_index(){
