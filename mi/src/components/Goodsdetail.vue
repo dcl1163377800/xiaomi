@@ -58,7 +58,7 @@
                 <div class="goods_info_content">
                     <div class="selected">
                         <span class="se_left">已选</span>
-                        <span @click="writeMessageShow=true">{{goods.gName}}</span>
+                        <span>{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
                     </div>
                     
@@ -79,10 +79,10 @@
                 </div>
             </div>
             <!-- 点击弹出遮罩层 -->
-             <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageShow=false">
+             <div class="wmassageMask" v-show="writeMessageShow">
             　　<div class="messageMaskContent" ref="msk">
                     <div class="showList">
-                        <span>×</span>
+                        <span @click="writeMessageShow=false">×</span>
                     </div>
                     <div class="side">
                         <div class="img_">
@@ -106,6 +106,14 @@
                     <div class="xinhao">
                         <span>黑色</span>
                     </div>
+                    <div class="banben">
+                        <span>套餐</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>标配</span>
+                        <span>十元快充</span>
+                    </div>
+                    <button>加入购物车</button>
             　　</div>
              </div>
             <!-- 评论 -->
@@ -168,7 +176,7 @@
                 <span class="num"></span>
             </div>
             <div class="buying">
-                <button>加入购物车</button>
+                <button @click="writeMessageShow=true">加入购物车</button>
                 <span class="bool bool-animate" ref="bool"></span>
             </div>
         </div>
@@ -576,12 +584,25 @@ export default {
                 .xinhao{
                     span{
                         display: inline-block;
-                        width: 1rem;
+                        width: 1.6rem;
+                        height: 0.8rem;
+                        line-height: 0.8rem;
+                        text-align: center;
                         border: 1px solid #ff6700;
                         margin-left: 6%;
                         margin-top: 4%;
                         color: #ff6700;
                     }
+                }
+                button{
+                    width: 80%;
+                    height: 1rem;
+                    margin: 7% 10%;
+                    border-radius: 0.5rem;
+                    border: 0;
+                    background: #ff6700;
+                    color: white;
+                    font-size: 0.3rem;
                 }
             }
 
