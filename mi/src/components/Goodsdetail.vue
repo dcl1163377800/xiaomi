@@ -1,6 +1,6 @@
 <template>
-<div>
-    <div class="menu"></div>
+<!-- <div> -->
+    <!-- <div class="menu"></div> -->
     <div id="goodsdetail">
         <div class="goods_detail" v-for="goods in songList" :key="goods.w_id">
             <div class="detail_swiper">
@@ -142,7 +142,7 @@
             </div>
         </div>
     </div> 
-    <!-- </div>  -->
+    <!-- </div> s -->
 </template>
 <script>
 // import service from '../services/service';
