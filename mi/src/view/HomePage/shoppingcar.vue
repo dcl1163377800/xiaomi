@@ -5,19 +5,19 @@
             <span>购物车</span>
             <span class="iconfont icon-suosou"></span>
         </div>
-        <div class="nav">
+        <div class="nav" v-for="item in cartList" :key="item.p_id">
             <div class="checkList">
                 <input type="checkbox">
             </div>
             <div class="imgList">
-                <img src="../../assets/11.jpg" alt="">
+                <img :src="item.p_img" alt="">
             </div>
             <div class="goodsTitle">
-                <p>Redmi K20 Pro 全网通版8GB+256GB 冰川蓝 256GB</p>
-                <span>售价:2999元</span>
+                <p>{{item.p_name}}</p>
+                <span>售价：{{item.p_price}}</span>
                 <div class="content">
                     <span>-</span>
-                    <input type="text" value="1">
+                    <span>{{item.count}}</span>
                     <span>+</span>
                 </div>
             </div>
@@ -30,7 +30,13 @@
 
 <script>
 export default {
-    
+    data(){
+        return{
+            cartList:[
+                {p_id:'01',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999元',count:1}
+            ]
+        }      
+    }
 }
 </script>
 
@@ -53,7 +59,7 @@ export default {
         }
     }
     .nav{
-        margin-top: 0.5rem;
+        margin: 0.3rem 0;
         width: 100%;
         display: flex;
         align-items: center;
@@ -69,7 +75,7 @@ export default {
             }
         }
         .imgList{
-            width: 20%;
+            width: 25%;
             border: 1px solid #eee;
             img{
                 width: 100%;
@@ -79,8 +85,14 @@ export default {
         .goodsTitle{
             width: 60%;
             margin-left: 0.2rem;
+            p{
+                color:#666;
+                // text-overflow: ellipsis;
+                // white-space:nowrap;
+            }
             span{
                 color: #999;
+                font-size:12px;
             }
             .content{
                 span{
@@ -88,14 +100,21 @@ export default {
                     width: 0.5rem;
                     height: 0.5rem;
                     border:1px solid #eee;
-                }
-                input{
-                    border: 0;
-                    width: 0.5rem;
-                    height: 0.5rem;
-                    border: 1px solid #eee;
                     text-align: center;
+                    color:#000;
                 }
+                span:nth-child(odd){
+                    background: #eee;
+                }
+                // input{
+                //     border: 0;
+                //     width: 0.5rem;
+                //     height: 0.5rem;
+                //     border: 1px solid #eee;
+                //     text-align: center;
+                //     border-left:0;
+                //     border-right:0;
+                // }
             }
             p{
                 margin-top:0.1rem;
@@ -103,7 +122,7 @@ export default {
         }
         .deleteList{
             width: 10%;
-            margin-top: 1rem;
+            margin-top: 1.3rem;
             span{
               font-size: 0.4rem;
               color: #999;

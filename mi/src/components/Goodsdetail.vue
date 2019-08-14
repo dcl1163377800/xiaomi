@@ -127,11 +127,13 @@
         <div class="footer">
             <div class="index">
                 <span class="iconfont icon-shouyefanhuishouye"></span>
-                <p>首页</p>
+                <!-- <p>首页</p> -->
+                <router-link to="/">首页</router-link>
             </div>
             <div class="cart">
                 <span class="iconfont icon-qicheqianlian-1-copy"></span>
-                <p>购物车</p>
+                <!-- <p>购物车</p> -->
+                <router-link to="/HomePage/shoppingcar">购物车</router-link>
                 <span class="num"></span>
             </div>
             <div class="buying">
@@ -474,9 +476,10 @@ export default {
         justify-content: space-around;
         .index, .cart{
             text-align: center;
-            p{
+            a{
                 color: rgba(0,0,0,.54);
                 font-size:12px;
+                display:block;
             }
         }
         .buying{
