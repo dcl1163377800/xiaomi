@@ -107,9 +107,9 @@ export default {
     mounted(){
       if(window.sessionStorage.token){
         return this.flag=true;
-        location.reload();
+        // location.reload();
       }else{
-        return this.flag=false
+        return this.flag=false;
       }
     },
 

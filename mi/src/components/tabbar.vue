@@ -42,7 +42,7 @@
                 </div>
                 <div class="w2">        
                   <p class="watch_name">{{item.gName}}</p>
-                  <p class="watch_brief">{{item.gbrief}}</p>
+                  <p class="watch_brief">{{item.gBrief}}</p>
                   <p class="watch_price">
                     <span class="new_price">{{item.gewPrice}}</span>
                     <span class="old_price">{{item.gldPrice}}</span>

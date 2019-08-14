@@ -8,12 +8,9 @@
             <div class="phone_name">{{phone.gName}}</div>
             <div class="phone_prief">{{phone.gBrief}}</div>
             <div class="phone_price">￥{{phone.gewPrice}}</div>
-            <!-- <div class="phone_oldPrice">￥{{phone.oldPrice}}</div> -->
             <button>立即预购</button>
         </div>
         </span>
-        
-    <!-- <a href="" class="data_log"></a> -->
   </div>
 </template>
 <script>

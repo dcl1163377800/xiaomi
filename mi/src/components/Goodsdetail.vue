@@ -16,11 +16,12 @@
                 </mt-swipe>
             </div>
             <div class="goods_content">
-                <p class="goods_name">{{goods.gName}}</p>
+
+                <p class="goods_name">{{goods.gContent}}</p>
                 <p class="goods_brief">{{goods.gBrief}}</p>
                 <div class="price">
-                    <span class="new_price">{{goods.gewPrice}}元</span>
-                    <span class="old_price">{{goods.gldPrice}}元</span>
+                    <span class="new_price" ref="p_price">￥{{goods.gewPrice}}</span>
+                    <span class="old_price">￥{{goods.gldPrice}}</span>
                 </div>
             </div>
             <div class="goods_param">
@@ -57,8 +58,10 @@
                     <div class="selected">
                         <span class="se_left">已选</span>
                         <span>{{goods.gName}}</span>
+                        <span @click="writeMessageShow=true">{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
                     </div>
+                    
                     <div class="address">
                         <span class="ad_left">送至</span>
                         <span>北京市 东城区</span>
@@ -75,6 +78,36 @@
                     </div>
                 </div>
             </div>
+            <!-- 点击弹出遮罩层 -->
+             <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageShow=false">
+            　　<div class="messageMaskContent" ref="msk">
+                    <div class="showList">
+                        <span>×</span>
+                    </div>
+                    <div class="side">
+                        <div class="img_">
+                            <img src="../assets/list1.jpg" alt="">
+                        </div>
+                        <div class="title_List">
+                            <span>￥999</span>
+                            <span>￥632</span>
+                            <p>Redmi Note 7 4GB+64GB 亮黑色的数据大姐大傻傻</p>
+                        </div>
+                    </div>
+                    <div class="banben">
+                        <span>版本</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>43英寸</span>
+                    </div>
+                    <div class="banben">
+                        <span>颜色</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>黑色</span>
+                    </div>
+            　　</div>
+             </div>
             <!-- 评论 -->
             <div class="comment">
                 <div class="person">
@@ -135,8 +168,10 @@ export default {
     },
     data(){
         return{
+            writeMessageShow: false,
             currentIndex:0,
             watchList:[],
+            songList:[],
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
                 {tab_id:'02',tab_title:'参数'},
@@ -200,6 +235,11 @@ export default {
         })
     },
     methods:{
+        writeMessageFun (ev) {
+    // 　　　　if (!this.$refs.msk.contains(ev.target)) {
+    // 　　　　　　this.writeMessageShow = false;
+    // 　　　　}
+    　　},
         goback_index(){
             this.$router.go(-1);
         },
@@ -245,8 +285,6 @@ export default {
                 font-size:12px;
                 color:rgba(0,0,0,.54);
                 white-space: wrap;
-                // height:1rem;
-                // line-height: 1rem;
             }
             .price{
                 padding: 0.2rem 0;
@@ -285,13 +323,13 @@ export default {
                 }
             }
         }
-        .goods_info{
+        &>.goods_info{
             padding: 0 2%;
-            .goods_info_content{
+            &>.goods_info_content{
                 background-color: #fafafa;
                 border-radius:0.2rem;
                 border-bottom:1px solid rgb(245, 239, 239);
-                div{
+                &>div{
                     border-bottom:1px solid rgb(245, 239, 239);
                     height:1rem;
                     line-height:1rem;
@@ -307,10 +345,12 @@ export default {
                         display:inline-block;
                         margin-right:1rem;
                     }
-                    span:last-child{
-                        float:right;
+              
+                        span:last-child{
+                            float:right;
+                        }
                     }
-                }
+                      
                 .address{
                     .ad_left{
                         color: rgba(0,0,0,.54);
@@ -441,40 +481,120 @@ export default {
             }
         }
     }
-    
-    // .footer{
-    //     position:fixed;
-    //     bottom:0.1rem;
-    //     left:0.2rem;
-    //     right:0.2rem;
-    //     box-shadow: 1px 1px 2px 1px #ccc;
-    //     border-radius:15px;
-    //     height:1rem;
-    //     z-index: 1;
-    //     background-color: #fff;
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: space-around;
-    //     .index, .cart{
-    //         text-align: center;
-    //         a{
-    //             color: rgba(0,0,0,.54);
-    //             font-size:12px;
-    //             display:block;
-    //         }
-    //     }
-    //     .buying{
-    //         button{
-    //             color:#fff;
-    //             width:2rem;
-    //             height:0.7rem;
-    //             background:#ff6700;
-    //             border-radius:30px;
-    //             border:0;
-    //             font-size:14px;
-    //             outline:none;
-    //         }
-    //     }
-    // }
-    
+    //点击弹出遮罩层
+    .wmassageMask{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0,0,0,.3);
+        z-index: 101;
+        .messageMaskContent{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            // transition: all 2s;
+            height: 10rem;
+            background-color: #fff;
+                .showList{
+                    width: 100%;
+                    text-align: right;
+                    span{
+                        font-size: 0.8rem;
+                        color: gray;
+                    }
+                }
+                .side{
+                    width: 100%;
+                    height: 2rem;
+                    display: flex;
+                    justify-content: center;
+                    padding: 0 3%;
+                    .img_{
+                        width: 30%;
+                        height: 2rem;
+                        img{
+                            width: 100%;
+                        }
+                    }
+                    .title_List{
+                        width: 70%;
+                        span{
+                            margin-top: 4%;
+                            margin-left: 4%;
+                            display: inline-block;
+                        }
+                        span:nth-child(1){
+                            color: #ff6700;
+                            font-size: 0.5rem;
+                        }
+                         span:nth-child(2){
+                            color: gray;
+                            text-decoration: line-through;
+                        }
+                        p{
+                            color: #3c3c3c;
+                            width: 100%;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            margin-left: 4%;
+                            margin-top: 4%;
+                            font-size: 0.28rem;
+                        }
+                    }
+                }
+                .banben{
+                    margin-top: 2%;
+                    span{
+                        margin-left: 4%;
+                    }
+                }
+                .xinhao{
+                    span{
+                        display: inline-block;
+                        width: 1rem;
+                        border: 1px solid #ff6700;
+                        margin-left: 6%;
+                        margin-top: 4%;
+                        color: #ff6700;
+                    }
+                }
+            }
+
+        }
+    .footer{
+        position:fixed;
+        bottom:0.1rem;
+        left:0.2rem;
+        right:0.2rem;
+        box-shadow: 1px 1px 2px 1px #ccc;
+        border-radius:15px;
+        height:1rem;
+        z-index: 1;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .index, .cart{
+            text-align: center;
+            a{
+                color: rgba(0,0,0,.54);
+                font-size:12px;
+                display:block;
+            }
+        }
+        .buying{
+            button{
+                color:#fff;
+                width:2rem;
+                height:0.7rem;
+                background:#ff6700;
+                border-radius:30px;
+                border:0;
+                font-size:14px;
+            }
+        }
+    }
 </style>
