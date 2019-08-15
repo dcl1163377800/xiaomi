@@ -33,7 +33,7 @@
                     <span class="yuan">元</span> 
                 </p>
             </div>
-            <div class="continue_cart">
+            <div class="continue_cart" @click="go_toshopping">
                 继续购物
             </div>
             <div class="gopay" @click="gopay">去结算</div> 
@@ -118,6 +118,11 @@ export default {
                 document.getElementsByClassName('price')[0].innerHTML=totalPrice;
            })
         },
+        go_toshopping(){
+            console.log(1111111)
+            this.$router.push('/')
+        }
+        
 
     },
     mounted(){       

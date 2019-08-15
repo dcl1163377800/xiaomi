@@ -5,9 +5,7 @@
             <span>用户结算</span>
         </div>
         <div class="address">
-            <router-link to='/address'>
-            <span>添加收货地址</span>
-            </router-link>
+            <router-link to="/address"><span>添加收货地址</span></router-link>
             <span class="iconfont icon-icon1"></span>
         </div>
         <div class="alipay">

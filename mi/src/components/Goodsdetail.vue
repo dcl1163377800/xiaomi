@@ -54,7 +54,7 @@
                 </ul>
             </div>
             <div class="goods_info">
-                <div class="goods_info_content">
+                <div class="goods_info_content" @click="writeMessageShow=true">
                     <div class="selected">
                         <span class="se_left">已选</span>
                         <span>{{goods.gName}}</span>
@@ -79,33 +79,41 @@
                 </div>
             </div>
             <!-- 点击弹出遮罩层 -->
-             <div class="wmassageMask" v-show="writeMessageShow" @click="writeMessageShow=false">
+             <div class="wmassageMask" v-show="writeMessageShow">
             　　<div class="messageMaskContent" ref="msk">
                     <div class="showList">
-                        <span>×</span>
+                        <span @click="writeMessageShow=false">×</span>
                     </div>
                     <div class="side">
                         <div class="img_">
-                            <img src="../assets/list1.jpg" alt="">
+                            <img :src="goods.gImg" alt="">
                         </div>
                         <div class="title_List">
-                            <span>￥999</span>
-                            <span>￥632</span>
-                            <p>Redmi Note 7 4GB+64GB 亮黑色的数据大姐大傻傻</p>
+                            <span>￥{{goods.gewPrice}}</span>
+                            <span>￥{{goods.gldPrice}}</span>
+                            <p>{{goods.gContent}}</p>
                         </div>
                     </div>
                     <div class="banben">
                         <span>版本</span>
                     </div>
                     <div class="xinhao">
-                        <span>43英寸</span>
+                        <span>{{goods.gBan1}}</span>
                     </div>
                     <div class="banben">
                         <span>颜色</span>
                     </div>
                     <div class="xinhao">
-                        <span>黑色</span>
+                        <span>{{goods.gColor1}}</span>
                     </div>
+                    <div class="banben">
+                        <span>套餐</span>
+                    </div>
+                    <div class="xinhao">
+                        <span>标配</span>
+                        <span>十元快充</span>
+                    </div>
+                    <button>加入购物车</button>
             　　</div>
              </div>
             <!-- 评论 -->
@@ -155,7 +163,23 @@
                 </div>
             </div>
         </div>
-        <detailfooter ></detailfooter>
+        <div class="footer">
+            <div class="index">
+                <span class="iconfont icon-shouyefanhuishouye"></span>
+                <!-- <p>首页</p> -->
+                <router-link to="/">首页</router-link>
+            </div>
+            <div class="cart">
+                <span class="iconfont icon-qicheqianlian-1-copy"></span>
+                <!-- <p>购物车</p> -->
+                <router-link to="/HomePage/shoppingcar">购物车</router-link>
+                <span class="num"></span>
+            </div>
+            <div class="buying">
+                <button>加入购物车</button>
+                <span class="bool bool-animate" ref="bool"></span>
+            </div>
+        </div>
     </div> 
 </template>
 <script>
@@ -231,6 +255,7 @@ export default {
         // code=3 笔记本
         // http://192.168.61.244:8080/XiaoMi/search?code=3&id=01
         axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=2&id=` + this.$route.query.id).then((res) => {
+            console.log(res.data);
             this.watchList.push(res.data);
 
              let gname = res.data.gName;
@@ -258,11 +283,6 @@ export default {
         })
     },
     methods:{
-        writeMessageFun (ev) {
-    // 　　　　if (!this.$refs.msk.contains(ev.target)) {
-    // 　　　　　　this.writeMessageShow = false;
-    // 　　　　}
-    　　},
         goback_index(){
             this.$router.go(-1);
         },
@@ -505,7 +525,7 @@ export default {
         }
     }
     //点击弹出遮罩层
-    .wmassageMask{
+    .wmassageMask{ 
         position: fixed;
         top: 0;
         bottom: 0;
@@ -540,6 +560,7 @@ export default {
                         height: 2rem;
                         img{
                             width: 100%;
+                            height: 100%;
                         }
                     }
                     .title_List{
@@ -577,12 +598,25 @@ export default {
                 .xinhao{
                     span{
                         display: inline-block;
-                        width: 1rem;
+                        width: 1.6rem;
+                        height: 0.8rem;
+                        line-height: 0.8rem;
+                        text-align: center;
                         border: 1px solid #ff6700;
                         margin-left: 6%;
                         margin-top: 4%;
                         color: #ff6700;
                     }
+                }
+                button{
+                    width: 80%;
+                    height: 1rem;
+                    margin: 7% 10%;
+                    border-radius: 0.5rem;
+                    border: 0;
+                    background: #ff6700;
+                    color: white;
+                    font-size: 0.3rem;
                 }
             }
 

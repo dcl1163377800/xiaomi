@@ -14,7 +14,7 @@
                 <router-link to="/HomePage/shoppingcar">购物车</router-link>
             </div>
             <div class="buying">
-                <button @click="addToCart">加入购物车</button>
+                <button>加入购物车</button>
                 <span class="bool bool-animate" ref="bool"></span>
             </div>
         </div>
@@ -27,7 +27,8 @@ export default {
     name:'detailfooter',
     data(){
         return{
-            message:null
+            message:null,
+            writeMessageShow:false
         }
     },
     mounted(){
@@ -104,4 +105,5 @@ export default {
             }
         }
     }
+   
 </style>

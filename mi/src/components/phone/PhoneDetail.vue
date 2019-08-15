@@ -54,7 +54,7 @@
       </div>
       <div class="goods_info">
         <div class="goods_info_content">
-          <div class="selected">
+          <div class="selected" @click="writeMessageShow=true">
             <span class="se_left">已选</span>
             <span>{{goods.gName}}</span>
             <span class="iconfont icon-icon1"></span>
@@ -73,6 +73,47 @@
             <span>7天无理由退货</span>
             <span class="iconfont icon-icon1"></span>
           </div>
+        </div>
+      </div>
+      <!-- 点击弹出遮罩层 -->
+      <div class="wmassageMask" v-show="writeMessageShow">
+        <div class="messageMaskContent" ref="msk">
+          <div class="showList">
+            <span @click="writeMessageShow=false">×</span>
+          </div>
+          <div class="side">
+            <div class="img_">
+              <img :src="goods.gImg" alt />
+            </div>
+            <div class="title_List">
+              <span>￥{{goods.gewPrice}}</span>
+              <!-- <span>￥632</span> -->
+              <p>{{goods.gContent}}</p>
+            </div>
+          </div>
+          <div class="banben">
+            <span>版本</span>
+          </div>
+          <div class="xinhao">
+            <span>{{goods.gBan1}}</span>
+            <span>{{goods.gBan2}}</span>
+          </div>
+          <div class="banben">
+            <span>颜色</span>
+          </div>
+          <div class="xinhao">
+            <span>{{goods.gColor1}}</span>
+            <span>{{goods.gColor2}}</span>
+            <span>{{goods.gColor3}}</span>
+          </div>
+          <div class="banben">
+            <span>套餐</span>
+          </div>
+          <div class="xinhao">
+            <span>标配</span>
+            <span>十元快充</span>
+          </div>
+          <button>加入购物车</button>
         </div>
       </div>
       <!-- 评论 -->
@@ -138,7 +179,6 @@
 <script>
 import axios from "axios";
 import detailfooter from "../DetailFooter";
-// console.log(document.getElementsByClassName('goods_name')[0],77777)
 export default {
   name: "phonedetail",
   components: {
@@ -146,14 +186,15 @@ export default {
   },
   data() {
     return {
-      phoneList: [],
-      currentIndex: 0,
-      detailed_tab: [
-        { tab_id: "01", tab_title: "概述" },
-        { tab_id: "02", tab_title: "参数" },
-        { tab_id: "03", tab_title: "安装服务" },
-        { tab_id: "04", tab_title: "常见问题" }
-      ],
+        writeMessageShow:false,
+        phoneList: [],
+        currentIndex: 0,
+        detailed_tab: [
+            { tab_id: "01", tab_title: "概述" },
+            { tab_id: "02", tab_title: "参数" },
+            { tab_id: "03", tab_title: "安装服务" },
+            { tab_id: "04", tab_title: "常见问题" }
+        ],
       detailed: [
         {
           summary_id: "01",
@@ -267,7 +308,6 @@ export default {
       .then(res => {
         console.log(res.data);
         this.phoneList.push(res.data);
-        // console.log(res.data.gName);
         let gname = res.data.gName;
         let gbrief = res.data.gBrief;
         let gimg = res.data.gImg;
@@ -276,41 +316,33 @@ export default {
         let color = 3;
         let userid = 1111111;
         let gId = 1;
-        console.log(gname, gbrief, gnewprice, gimg, num, color, userid, gId);
+
         let obb = {
           gname: gname,
           gbrief: gbrief,
           gnewprice: gnewprice,
           gimg: gimg,
-
           num: num,
           color: color,
           userid: userid,
           gId: gId
         };
-        let str_obb=JSON.stringify(obb);
-        sessionStorage.setItem("gotocar",str_obb);
-
-        let list = sessionStorage.getItem("gotocar");
-        console.log(list);
-        let car_list= JSON.parse(list); // 转成JSON字符串
-        console.log(car_list)
-
-    
+        let str_obb = JSON.stringify(obb);
+        sessionStorage.setItem("gotocar", str_obb);
       });
 
     //获取商品信息
 
-    sessionStorage.setItem("gotocar", {
-      gname,
-      gbrief,
-      gnewprice,
-      gimg,
-      num,
-      color,
-      userid,
-      gId
-    });
+    // sessionStorage.setItem("gotocar", {
+    //   gname,
+    //   gbrief,
+    //   gnewprice,
+    //   gimg,
+    //   num,
+    //   color,
+    //   userid,
+    //   gId
+    // });
   },
   methods: {
     goback_index() {
@@ -452,6 +484,103 @@ export default {
       }
     }
   }
+  //点击弹出遮罩层
+  .wmassageMask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 101;
+    .messageMaskContent {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      // transition: all 2s;
+      height: 10rem;
+      background-color: #fff;
+      .showList {
+        width: 100%;
+        text-align: right;
+        span {
+          font-size: 0.8rem;
+          color: gray;
+        }
+      }
+      .side {
+        width: 100%;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        padding: 0 3%;
+        .img_ {
+          width: 30%;
+          height: 2rem;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .title_List {
+          width: 70%;
+          span {
+            margin-top: 4%;
+            margin-left: 4%;
+            display: inline-block;
+          }
+          span:nth-child(1) {
+            color: #ff6700;
+            font-size: 0.5rem;
+          }
+          span:nth-child(2) {
+            color: gray;
+            text-decoration: line-through;
+          }
+          p {
+            color: #3c3c3c;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            margin-left: 4%;
+            margin-top: 4%;
+            font-size: 0.28rem;
+          }
+        }
+      }
+      .banben {
+        margin-top: 2%;
+        span {
+          margin-left: 4%;
+        }
+      }
+      .xinhao {
+        span {
+          display: inline-block;
+          width: 1.6rem;
+          height: 0.8rem;
+          line-height: 0.8rem;
+          text-align: center;
+          border: 1px solid #ff6700;
+          margin-left: 6%;
+          margin-top: 4%;
+          color: #ff6700;
+        }
+      }
+      button {
+        width: 80%;
+        height: 1rem;
+        margin: 7% 10%;
+        border-radius: 0.5rem;
+        border: 0;
+        background: #ff6700;
+        color: white;
+        font-size: 0.3rem;
+      }
+    }
+  }
+
   .comment {
     margin: 2%;
     border-radius: 0.2rem;
@@ -489,8 +618,6 @@ export default {
       text-align: justify;
       .writing {
         margin: 0 0.2rem;
-        // line-height:0.4rem;
-        // height:0.8rem;
         text-overflow: ellipsis;
         overflow: hidden;
         color: rgba(0, 0, 0, 0.87);
