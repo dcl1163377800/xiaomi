@@ -1,6 +1,4 @@
 <template>
-<div>
-    <div class="menu"></div>
     <div id="goodsdetail">
         <div class="goods_detail" v-for="goods in computerList" :key="goods.w_id">
             <div class="detail_swiper">
@@ -82,7 +80,7 @@
                 <!-- 45646546546546 -->
             </div>
         </div>
-        <div class="footer">
+        <!-- <div class="footer">
             <div class="index">
                 <span class="iconfont icon-shouyefanhuishouye"></span>
                 <p>首页</p>
@@ -94,25 +92,51 @@
             <div class="buying">
                 <button>立即抢购</button>
             </div>
-        </div>
-    </div> 
+        </div> -->
+        <detailfooter ></detailfooter>
     </div> 
 </template>
 <script>
 import axios from 'axios';
+import detailfooter from './DetailFooter'
 export default {
     name:'goodsdetail',
+    components:{
+        detailfooter
+    },
     data(){
         return{
-            computerList:[
-                // {w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-            ]
+            computerList:[],
         }
     },
     mounted() {
         axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=3&id=` + this.$route.query.id).then((res) => {
             console.log(res.data);
             this.computerList.push(res.data);
+
+
+             let gname = res.data.gName;
+        let gbrief = res.data.gBrief;
+        let gimg = res.data.gImg;
+        let gnewprice = res.data.gewPrice;
+        let num = 1;
+        let color = 3;
+        let userid = 1111111;
+        let gId = 1;
+        console.log(gname, gbrief, gnewprice, gimg, num, color, userid, gId);
+        let obb = {
+          gname: gname,
+          gbrief: gbrief,
+          gnewprice: gnewprice,
+          gimg: gimg,
+
+          num: num,
+          color: color,
+          userid: userid,
+          gId: gId
+        };
+        let str_obb=JSON.stringify(obb);
+        sessionStorage.setItem("gotocar",str_obb);
         })
     },
     methods:{
@@ -250,37 +274,37 @@ export default {
         }
     }
     
-    .footer{
-        position:fixed;
-        bottom:0.1rem;
-        left:0.2rem;
-        right:0.2rem;
-        box-shadow: 1px 1px 2px 1px #ccc;
-        border-radius:15px;
-        height:1rem;
-        z-index: 1;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        .index, .cart{
-            text-align: center;
-            p{
-                color: rgba(0,0,0,.54);
-                font-size:12px;
-            }
-        }
-        .buying{
-            button{
-                color:#fff;
-                width:2rem;
-                height:0.7rem;
-                background:#ff6700;
-                border-radius:30px;
-                border:0;
-                font-size:14px;
-            }
-        }
-    }
+    // .footer{
+    //     position:fixed;
+    //     bottom:0.1rem;
+    //     left:0.2rem;
+    //     right:0.2rem;
+    //     box-shadow: 1px 1px 2px 1px #ccc;
+    //     border-radius:15px;
+    //     height:1rem;
+    //     z-index: 1;
+    //     background-color: #fff;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: space-around;
+    //     .index, .cart{
+    //         text-align: center;
+    //         p{
+    //             color: rgba(0,0,0,.54);
+    //             font-size:12px;
+    //         }
+    //     }
+    //     .buying{
+    //         button{
+    //             color:#fff;
+    //             width:2rem;
+    //             height:0.7rem;
+    //             background:#ff6700;
+    //             border-radius:30px;
+    //             border:0;
+    //             font-size:14px;
+    //         }
+    //     }
+    // }
     
 </style>

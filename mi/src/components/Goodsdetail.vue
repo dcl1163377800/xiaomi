@@ -232,6 +232,29 @@ export default {
         // http://192.168.61.244:8080/XiaoMi/search?code=3&id=01
         axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=2&id=` + this.$route.query.id).then((res) => {
             this.watchList.push(res.data);
+
+             let gname = res.data.gName;
+        let gbrief = res.data.gBrief;
+        let gimg = res.data.gImg;
+        let gnewprice = res.data.gewPrice;
+        let num = 1;
+        let color = 3;
+        let userid = 1111111;
+        let gId = 1;
+        console.log(gname, gbrief, gnewprice, gimg, num, color, userid, gId);
+        let obb = {
+          gname: gname,
+          gbrief: gbrief,
+          gnewprice: gnewprice,
+          gimg: gimg,
+
+          num: num,
+          color: color,
+          userid: userid,
+          gId: gId
+        };
+        let str_obb=JSON.stringify(obb);
+        sessionStorage.setItem("gotocar",str_obb);
         })
     },
     methods:{

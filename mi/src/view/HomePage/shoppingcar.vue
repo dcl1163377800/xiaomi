@@ -8,8 +8,6 @@
         <div class="nav" v-for="(item) in cartList" :key="item.p_id">
             <div class="checkList">
                 <input type="checkbox" @click="checkOne(item)">
-                <!-- <img class="choice" :src="require(`../../assets/${item.}`)"" alt=""> -->
-                <!-- <a href="javascript:;" @click="checkOne(item,index)" class="unchecked" :class="{checked:item == activeitem}"></a> -->
             </div>
             <div class="imgList">
                 <img :src="item.p_img" alt="">
@@ -66,7 +64,6 @@ export default {
             ],
             count: "",
             checkList:[],
-            activeitem:null,
         }      
     },
     computed: {
@@ -85,8 +82,8 @@ export default {
         },
         addProduct(item){
             item.count++;
-             let position=this.cartList.indexOf(item);
-              let dec_value=this.$refs.dec_input[position].value;
+            let position=this.cartList.indexOf(item);
+            let dec_value=this.$refs.dec_input[position].value;
             let value=this.$refs.count_input[position].value;
             if(value>=1){
                 this.$refs.dec_input[position].value='-'
@@ -101,7 +98,7 @@ export default {
                 item.count--;
             } 
             // if(value==1){
-            //     this.$refs.dec_input[position].innerHTML='';
+            //     this.$refs.dec_input[position].value='';
             // }
         },
 
@@ -125,7 +122,7 @@ export default {
     },
     mounted(){       
         // if(this.$refs.count_input.value==1){
-        //         this.$refs.dec_input.innerHTML=''
+        //         this.$refs.dec_input.value=''
         //     }
         
         // axios.get(`http://192.168.61.244:8080/XiaoMi/insertGoods?userid=${}&gname=${}&gbrief=${}&gnewprice=${}&num=${}&gId=${}&gcolor=${}`).then((res) => {

@@ -130,6 +130,7 @@ export default {
   },
   mounted(){
     axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
+      // console.log(res.data,111);
       this.computerList = res.data;    
     });
     axios.get('http://192.168.61.244:8080/XiaoMi//Tv').then((res)=>{
