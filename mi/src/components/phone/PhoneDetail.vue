@@ -1,6 +1,6 @@
 <template>
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in computerList" :key="goods.w_id">
+        <div class="goods_detail" v-for="goods in phoneList" :key="goods.gID">
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -19,8 +19,8 @@
                 <p class="goods_name">{{goods.gName}}</p>
                 <p class="goods_brief">{{goods.gitle}}</p>
                 <div class="price">
-                    <span class="new_price">￥{{goods.gewPrice}}</span>
-                    <!-- <span class="old_price">{{goods.gldPrice}}</span> -->
+                    <span class="new_price">{{goods.gewPrice}}元</span>
+                    <span class="old_price">{{goods.gldPrice}}</span>
                 </div>
             </div>
             <div class="goods_param">
@@ -53,8 +53,8 @@
                 </ul>
             </div>
             <div class="goods_info">
-                <div class="goods_info_content" @click="writeMessageShow=true">
-                    <div class="selected">
+                <div class="goods_info_content">
+                    <div class="selected" @click="writeMessageShow=true">
                         <span class="se_left">已选</span>
                         <span>{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-              <!-- 点击弹出遮罩层 -->
+            <!-- 点击弹出遮罩层 -->
             <div class="wmassageMask" v-show="writeMessageShow">
             　　<div class="messageMaskContent" ref="msk">
                     <div class="showList">
@@ -103,6 +103,8 @@
                     </div>
                     <div class="xinhao">
                         <span>{{goods.gColor1}}</span>
+                        <span>{{goods.gColor2}}</span>
+                        <span>{{goods.gColor3}}</span>
                     </div>
                     <div class="banben">
                         <span>套餐</span>
@@ -114,12 +116,12 @@
                     <button>加入购物车</button>
             　　</div>
             </div>
-             <!-- 评论 -->
+            <!-- 评论 -->
             <div class="comment">
                 <div class="person">
                     <!-- <span class="iconfont icon-wode"></span> -->
                     <div class="per_photo">
-                        <img src="../assets/12.png" alt="">
+                        <img src="../../assets/12.png" alt="">
                     </div>                   
                     <div class="per">
                         <p class="per_name">韩商言</p>
@@ -161,21 +163,21 @@
                 </div>
             </div>
         </div>
-        <detailfooter ></detailfooter>
+        <detailfooter></detailfooter>
     </div> 
 </template>
 <script>
 import axios from 'axios';
-import detailfooter from './DetailFooter'
+import detailfooter from '../DetailFooter';
 export default {
-    name:'goodsdetail',
+    name:'phonedetail',
     components:{
         detailfooter
     },
     data(){
         return{
-            writeMessageShow:false,
-            computerList:[],
+            writeMessageShow: false,
+            phoneList:[],
             currentIndex:0,
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
@@ -227,21 +229,27 @@ export default {
             ]
         }
     },
-    mounted() {
-        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=3&id=` + this.$route.query.id).then((res) => {
+    mounted(){
+        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=1&id=` + this.$route.query.id).then((res) => {
             console.log(res.data);
-            this.computerList.push(res.data);
+            this.phoneList.push(res.data);
         })
     },
     methods:{
         goback_index(){
             this.$router.go(-1);
+        },
+        changeLi($index){
+            this.currentIndex = $index;
+        },
+        addShopCart(){
+            
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-    .menu{
+     .menu{
         position: fixed;
         top: 0;
         width: 100%;
@@ -249,7 +257,7 @@ export default {
         background: #f2f2f2;
     }
     .goods_detail{
-        margin-bottom: 5rem;
+        margin-bottom: 2rem;
         .detail_swiper{
             position:relative;
             .header{
@@ -320,14 +328,17 @@ export default {
             padding: 0 2%;
             .goods_info_content{
                 background-color: #fafafa;
-                border-radius:5px;
+                border-radius:0.2rem;
+                border-bottom:1px solid rgb(245, 239, 239);
                 div{
-                    border-bottom:1px solid #ccc;
+                    border-bottom:1px solid rgb(245, 239, 239);
                     height:1rem;
                     line-height:1rem;
                     padding:0 0.3rem;
                     font-size: 12px;
-                    border-radius: 0.2rem;
+                }
+                div:last-child{
+                    border:0;
                 }
                 .selected{
                     .se_left{
@@ -366,8 +377,7 @@ export default {
                 }
             }
         }
-
-         .comment{
+        .comment{
             margin:2%;
             border-radius:0.2rem;
             background: #fafafa;
@@ -425,7 +435,7 @@ export default {
                 }
             }
         }
-               //点击弹出遮罩层
+            //点击弹出遮罩层
     .wmassageMask{ 
         position: fixed;
         top: 0;
@@ -568,5 +578,5 @@ export default {
         }
     }
     
-    
+   
 </style>

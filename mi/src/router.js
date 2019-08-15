@@ -9,7 +9,12 @@ import Goodsdetail from './components/Goodsdetail.vue'
 import Login from './components/Login.vue';
 import Register from './components/Register';
 import GoodsComputer from "./components/GoodsComputer.vue";
+import Account from './components/Account.vue';
+import PhoneDetail from './components/phone/PhoneDetail.vue'
+import DetailFooter from './components/DetailFooter';
 import Resetkey from "./components/Resetkey";
+import Address from "./components/Address";
+
 
 Vue.use(Router);
 const router=new Router({
@@ -27,7 +32,8 @@ const router=new Router({
                 },
                 {
                     path:"shoppingcar",
-                    component:Shoppingcar
+                    component:Shoppingcar,
+                    
                 },
                 {
                     path:"myshoppingcar",
@@ -37,6 +43,7 @@ const router=new Router({
                     path:"sort",
                     component:Sort
                 },
+               
             ]
         },
         {
@@ -60,8 +67,24 @@ const router=new Router({
             component:GoodsComputer
         },
         {
+            path:'/account',
+            component:Account
+        },
+        {
+            path:'/phonedetail',
+            component:PhoneDetail
+        },
+        {
+            path:'/detailfooter',
+            component:DetailFooter
+        },
+        {
             path:"/resetkey",
             component:Resetkey
+        },
+        {
+            path:"/address",
+            component:Address
         }
     ]
 })

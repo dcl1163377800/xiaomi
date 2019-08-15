@@ -96,7 +96,7 @@
               </div>
           </div>
           <div class="listWrap">
-              <div class="box" v-for="computer in computerList" :key="computer.c_id" @click="computerBy(computer.gID)">
+              <div class="box" v-for="computer in computerList" :key="computer.gID" @click="computerBy(computer.gID)">
                   <div class="imgList">
                       <img :src="computer.gImg" alt="">
                   </div>
@@ -124,28 +124,22 @@ export default {
   data() {
     return {
       selected: "1",
-      watchList:[
-       
-      ],
-       computerList:[
-      ]
+      watchList:[],
+      computerList:[]
     }
   },
   mounted(){
-
     axios.get('http://192.168.61.244:8080/XiaoMi/laptop').then((res)=>{
-      // console.log(res.data);
-      this.computerList = res.data;
-      
+      console.log(res.data)
+      this.computerList = res.data;    
     });
     axios.get('http://192.168.61.244:8080/XiaoMi//Tv').then((res)=>{
-      console.log(res.data);
+      console.log(res.data)
       this.watchList = res.data;
     })
   },
   methods:{
     buy(res){
-      console.log(res);
       this.$router.push({
         path:'/goodsdetail',
         query:{
@@ -154,7 +148,6 @@ export default {
       })
     },
     computerBy(result){
-      console.log(result);
       this.$router.push({
         path:"/goodsComputer",
         query:{
@@ -257,12 +250,15 @@ export default {
             background: #fff;
             text-align: center;
             padding-top: 0.2rem;
+          
             .watch_name{
               font-size:14px;
             }
             .watch_brief{
               font-size:12px;
               color:rgba(0,0,0,.54);
+              white-space: normal;
+              overflow: hidden;
             }
             .watch_price{
               font-size:12px;

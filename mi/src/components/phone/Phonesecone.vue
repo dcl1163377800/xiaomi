@@ -1,6 +1,6 @@
 <template>
   <div class="phone_second">
-        <span class="data_log" v-for="phone in phoneLlist" v-bind:key="phone.id">
+        <span class="data_log" v-for="phone in phoneLlist" v-bind:key="phone.gID" @click="phoneDetail(phone.gID)">
         <div class="img1">
             <img :src="phone.gImg" alt />
         </div>
@@ -20,6 +20,17 @@ export default {
     return {
       phoneLlist: []
     };
+  },
+  methods:{
+    phoneDetail(res){
+      // console.log(res);
+      this.$router.push({
+        path:'/phonedetail',
+        query:{
+          id:res
+        }
+      })
+    }
   },
   mounted(){
     axios.get('http://192.168.61.244:8080/XiaoMi/phone').then((res)=>{

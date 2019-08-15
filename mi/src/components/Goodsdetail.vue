@@ -1,8 +1,6 @@
 <template>
-<!-- <div> -->
-    <!-- <div class="menu"></div> -->
     <div id="goodsdetail">
-        <div class="goods_detail" v-for="goods in songList" :key="goods.gID" >
+        <div class="goods_detail" v-for="goods in watchList" :key="goods.gID">
             <div class="detail_swiper">
                 <div class="header">
                     <span class="iconfont icon-zuojiantou" @click="goback_index()"></span>  
@@ -10,14 +8,15 @@
                 </div>
                 <mt-swipe :auto="4000" style="height:8rem;width:100%">
                     <mt-swipe-item>
-                        <img :src="goods.gImg1" alt="" style="height:100%;width:100%">
+                        <img :src="goods.gImg" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                     <mt-swipe-item>
-                        <img id="img_src" :src="goods.gImg3" alt="" style="height:100%;width:100%">
+                        <img :src="goods.gImg1" alt="" style="height:100%;width:100%">
                     </mt-swipe-item>
                 </mt-swipe>
             </div>
             <div class="goods_content">
+
                 <p class="goods_name">{{goods.gContent}}</p>
                 <p class="goods_brief">{{goods.gBrief}}</p>
                 <div class="price">
@@ -55,10 +54,11 @@
                 </ul>
             </div>
             <div class="goods_info">
-                <div class="goods_info_content">
+                <div class="goods_info_content" @click="writeMessageShow=true">
                     <div class="selected">
                         <span class="se_left">已选</span>
                         <span>{{goods.gName}}</span>
+                        <span @click="writeMessageShow=true">{{goods.gName}}</span>
                         <span class="iconfont icon-icon1"></span>
                     </div>
                     
@@ -86,25 +86,25 @@
                     </div>
                     <div class="side">
                         <div class="img_">
-                            <img src="../assets/list1.jpg" alt="">
+                            <img :src="goods.gImg" alt="">
                         </div>
                         <div class="title_List">
-                            <span>￥999</span>
-                            <span>￥632</span>
-                            <p>Redmi Note 7 4GB+64GB 亮黑色的数据大姐大傻傻</p>
+                            <span>￥{{goods.gewPrice}}</span>
+                            <span>￥{{goods.gldPrice}}</span>
+                            <p>{{goods.gContent}}</p>
                         </div>
                     </div>
                     <div class="banben">
                         <span>版本</span>
                     </div>
                     <div class="xinhao">
-                        <span>43英寸</span>
+                        <span>{{goods.gBan1}}</span>
                     </div>
                     <div class="banben">
                         <span>颜色</span>
                     </div>
                     <div class="xinhao">
-                        <span>黑色</span>
+                        <span>{{goods.gColor1}}</span>
                     </div>
                     <div class="banben">
                         <span>套餐</span>
@@ -176,25 +176,26 @@
                 <span class="num"></span>
             </div>
             <div class="buying">
-                <button @click="writeMessageShow=true">加入购物车</button>
+                <button>加入购物车</button>
                 <span class="bool bool-animate" ref="bool"></span>
             </div>
         </div>
     </div> 
-    <!-- </div> s -->
 </template>
 <script>
-// import service from '../services/service';
+import detailfooter from './DetailFooter';
 import axios from 'axios';
 export default {
     name:'goodsdetail',
+    components:{
+        detailfooter
+    },
     data(){
         return{
             writeMessageShow: false,
             currentIndex:0,
-            songList:[
-                //{w_id:'01',w_img:require('../assets/swiper1.jpg'),w_img2:require('../assets/swiper2.jpg'),w_name:'小米电视4X 43英寸',w_brief:'PHD全高清屏， 人工智能语音',new_price:'￥1399',old_price:'￥1499'},
-            ],
+            watchList:[],
+            songList:[],
             detailed_tab:[
                 {tab_id:'01',tab_title:'概述'},
                 {tab_id:'02',tab_title:'参数'},
@@ -245,37 +246,26 @@ export default {
             ]
         }
     },
-    mounted() {
-        console.log(this.$route);
-        axios.get('http://192.168.61.244:8080/XiaoMi/search?code=2&id=' + this.$route.query.id).then((res) => {
-            console.log(res.data);
-            this.songList.push(res.data);
+    methods:{
 
+    },
+    mounted() {
+        // code=1 手机
+        // code=2 电视
+        // code=3 笔记本
+        // http://192.168.61.244:8080/XiaoMi/search?code=3&id=01
+        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=2&id=` + this.$route.query.id).then((res) => {
+            console.log(res.data);
+            this.watchList.push(res.data);
         })
     },
     methods:{
-        writeMessageFun (ev) {
-    // 　　　　if (!this.$refs.msk.contains(ev.target)) {
-    // 　　　　　　this.writeMessageShow = false;
-    // 　　　　}
-    　　},
         goback_index(){
             this.$router.go(-1);
         },
         changeLi($index){
             this.currentIndex = $index;
         },
-        addShopCart(){
-            
-        },
-        // addCar(){
-        //     console.log(this.$refs.p_name[0].innerText);
-        //     //  axios.get("http://192.168.61.244:8080/XiaoMi/insertGoods?userid=1&gname=2&gbrief=1&gnewprice=2&num=1&gId=3&gcolor=3").then((res) => {
-        //     // console.log(res.data);
-        //     // this.songList.push(res.data);
-
-        // // })
-        // }
     }
 }
 </script>
@@ -512,7 +502,7 @@ export default {
         }
     }
     //点击弹出遮罩层
-    .wmassageMask{
+    .wmassageMask{ 
         position: fixed;
         top: 0;
         bottom: 0;
@@ -547,6 +537,7 @@ export default {
                         height: 2rem;
                         img{
                             width: 100%;
+                            height: 100%;
                         }
                     }
                     .title_List{
@@ -640,5 +631,4 @@ export default {
             }
         }
     }
-    
 </style>
