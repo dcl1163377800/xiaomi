@@ -372,7 +372,11 @@ export default {
       let test_gb = this.$refs.gb[0].innerText;
       console.log(test_gb);
       sessionStorage.setItem("gb", test_gb);
-      alert('规格已经选好，请点击加入购物车')
+       this.$toast({
+                        message: '规格已经选好，请点击加入购物车',
+                        // iconClass: 'icon icon-success'
+                    });
+      // alert('规格已经选好，请点击加入购物车')
     },
     goback_index() {
       this.$router.go(-1);
@@ -404,7 +408,11 @@ export default {
       
 
       } else {
-        alert("你需要选好规格");
+         this.$toast({
+                        message: '你需要选好规格',
+                        // iconClass: 'icon icon-success'
+                    });
+        // alert("你需要选好规格");
       }
     }
   }

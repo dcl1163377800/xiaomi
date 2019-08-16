@@ -36,7 +36,7 @@
             <div class="continue_cart" @click="go_toshopping">
                 继续购物
             </div>
-            <div class="gopay" @click="gopay">去结算</div> 
+            <div class="gopay" @click=" gopay">去结算</div> 
         </div>
     </div>
 </template>
@@ -52,6 +52,8 @@ export default {
             ],
             count: "",
             checkList:[],
+            goodsname:[]
+
         }      
     },
     computed: {
@@ -114,7 +116,9 @@ export default {
         },
         checkOne(item){
            let list= this.checkList.push(item)
-           let priceList=[];          
+           let priceList=[];    
+           this.goodsname.push(item.goodsName);
+           
            this.checkList.forEach(item=>{
                 let price=item.goodsNewPrice*1;
                 priceList.push(price);               
@@ -127,6 +131,26 @@ export default {
         go_toshopping(){
             console.log(1111111)
             this.$router.push('/')
+        },
+        goto_aount(){
+            // http://192.168.61.244:8080/XiaoMi/clearCart?goodsname=${}
+            // console.log(this.goodsname,777777)
+            // let goods_name=this.goodsname;
+            // let goodsname=JSON.stringify(goods_name);
+            // console.log(goodsname,99999)
+
+            // axios.get(`http://192.168.61.244:8080/XiaoMi/clearCart?goodsname=${goodsname}`).then(res=>{
+            //     console.log(res.data)
+            //         this.$toast({
+            //             message: '正前往结算页面',
+            //             // iconClass: 'icon icon-success'
+            //         });
+            //     this.$router.push('/account');
+            // })
+
+
+
+
         }
         
 

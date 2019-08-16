@@ -93,7 +93,7 @@
               <p>{{goods.gContent}}</p>
             </div>
           </div>
-          <div @click="test">
+          <div @click="test1">
             <div class="banben">
               <span>版本</span>
             </div>
@@ -364,12 +364,31 @@ export default {
     },
 
     test() {
-     let test = sessionStorage.setItem("gb",this.$refs.color_span[0].innerText);
+    //  let test = sessionStorage.setItem("gb",this.$refs.color_span[0].innerText);
+
+      // if (sessionStorage.getItem('gb')) {
+      //     alert('规格已经选好，请点击加入购物车')
+      // } else {
+        this.$toast({
+                        message: '你需要选好规格',
+                        // iconClass: 'icon icon-success'
+                    });
+      // }
+    },
+    test1(){
+        let test = sessionStorage.setItem("gb",this.$refs.color_span[0].innerText);
 
       if (sessionStorage.getItem('gb')) {
-          alert('规格已经选好，请点击加入购物车')
+         this.$toast({
+                        message: '规格已经选好，请点击加入购物车',
+                        // iconClass: 'icon icon-success'
+                    });
+          // alert('规格已经选好，请点击加入购物车')
       } else {
-        alert("请选好规格");
+        this.$toast({
+                        message: '你需要选好规格',
+                        // iconClass: 'icon icon-success'
+                    });
       }
     },
     goback_index() {
@@ -396,7 +415,10 @@ export default {
             console.log(res.data);
             this.$router.push("/HomePage/shoppingcar");
             if(res.data.code==1){
-                alert('成功添加购物车')
+              this.$toast({
+                        message: '成功添加购物车',
+                        // iconClass: 'icon icon-success'
+                    });
             }
             
           });
@@ -405,7 +427,10 @@ export default {
               this.$router.push('/login');
           }
       } else {
-        alert("你需要选好规格");
+        this.$toast({
+                        message: '你需要选好规格',
+                        // iconClass: 'icon icon-success'
+                    });
       }
 
     

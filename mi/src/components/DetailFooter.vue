@@ -39,7 +39,10 @@ export default {
     methods:{
         test(){
             
-                alert('请选择规格')
+               this.$toast({
+                        message: '你需要选好规格',
+                        // iconClass: 'icon icon-success'
+                    });
             
         }
     }
