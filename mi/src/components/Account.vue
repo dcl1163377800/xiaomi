@@ -5,7 +5,16 @@
             <span>用户结算</span>
         </div>
         <div class="address">
-            <router-link to="/address"><span>添加收货地址</span></router-link>
+               <ul>
+                 <li>
+                    <div class="right r">
+                    <div class="city" @click="toAddress">{{city}}</div>
+                    <i class="arrow-r"></i>
+                    </div>
+                </li>
+            </ul>
+            <v-distpicker type="mobile" @selected="selected" v-show="addInp"></v-distpicker>
+            <div class="mask" v-show="mask"></div>
             <span class="iconfont icon-icon1"></span>
         </div>
         <div class="alipay">
@@ -73,8 +82,30 @@
     </div>
 </template>
 <script>
+import VDistpicker from "v-distpicker";
 export default {
-    name:'account'
+    name:'account',
+     components: {
+     VDistpicker
+  },
+  data() {
+    return {
+      city: "请点击选择地址",
+      addInp: false,
+      mask: false
+    };
+  },
+  methods: {
+    toAddress() {
+      this.mask = true;
+      this.addInp = true;
+    },
+    selected(data) {
+      this.mask = false;
+      this.addInp = false;
+      this.city =data.province.value + "" + data.city.value + "" + data.area.value;
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

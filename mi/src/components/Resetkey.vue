@@ -43,7 +43,7 @@ export default {
             if (reset_newpwd == reset_newpwd1) {
               axios
                 .get(
-                  `http://192.168.61.244:8080/XiaoMi/update?tel=${reset_phone}&pwd=${reset_oldpwd}&newPwd=${reset_newpwd}`
+                  `http://106.53.65.198:8080/XiaoMi/update?tel=${reset_phone}&pwd=${reset_oldpwd}&newPwd=${reset_newpwd}`
                 )
                 .then(res => {
                   console.log(res.data);
@@ -85,10 +85,13 @@ export default {
       color: #ff6700;
       width: 20%;
       height: 20%;
+      font-size: 1.5rem;
+      margin-top: 2%;
     }
   }
   .from_input {
     width: 100%;
+    padding: 0 4%;
     input {
       width: 100%;
       margin-bottom: 1rem;
@@ -101,6 +104,8 @@ export default {
       background: #ff6700;
       line-height: 1rem;
       font-size: 18px;
+      border-radius: 0.2rem;
+      color: white;
     }
   }
 }

@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted(){
-    axios.get('http://192.168.61.244:8080/XiaoMi/phone').then((res)=>{
+    axios.get('http://106.53.65.198:8080/XiaoMi/phone').then((res)=>{
       console.log(res.data);
       this.phoneLlist = res.data;
     })

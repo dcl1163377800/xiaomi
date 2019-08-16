@@ -14,7 +14,7 @@
                 <router-link to="/HomePage/shoppingcar">购物车</router-link>
             </div>
             <div class="buying">
-                <button>加入购物车</button>
+                <button @click="test">加入购物车</button>
                 <span class="bool bool-animate" ref="bool"></span>
             </div>
         </div>
@@ -34,20 +34,13 @@ export default {
     mounted(){
         let count_total=sessionStorage.getItem('totalcount');
         this.message=count_total;    
+        sessionStorage.setItem('gb',null)
     },
     methods:{
-        addToCart(){
-            console.log('footer')
-             let list = sessionStorage.getItem("gotocar");
-            console.log(list);
-            let car_list= JSON.parse(list);
-            console.log(car_list);
-
-            axios.get(`http://192.168.61.244:8080/XiaoMi/insertGoods?userid=111&gimg=${car_list.gimg}&gname=${car_list.gname}&gbrief=${car_list.gbrief}&gnewprice=${car_list.gnewprice}&num=${car_list.num}&gId=${car_list.gId}&gcolor=3`
-).then(res=>{
-    console.log(res.data)
-})
-
+        test(){
+            
+                alert('请选择规格')
+            
         }
     }
 

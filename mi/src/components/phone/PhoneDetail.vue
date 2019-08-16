@@ -94,17 +94,19 @@
           <div class="banben">
             <span>版本</span>
           </div>
-          <div class="xinhao">
-            <span>{{goods.gBan1}}</span>
-            <span>{{goods.gBan2}}</span>
-          </div>
-          <div class="banben">
-            <span>颜色</span>
-          </div>
-          <div class="xinhao">
-            <span>{{goods.gColor1}}</span>
-            <span>{{goods.gColor2}}</span>
-            <span>{{goods.gColor3}}</span>
+          <div @click="test">
+            <div class="xinhao">
+              <span ref="gb">{{goods.gBan1}}</span>
+              <!-- <span>{{goods.gBan2}}</span> -->
+            </div>
+            <div class="banben">
+              <span>颜色</span>
+            </div>
+            <div class="xinhao">
+              <span>{{goods.gColor1}}</span>
+              <!-- <span >{{goods.gColor2}}</span>
+              <span >{{goods.gColor3}}</span>-->
+            </div>
           </div>
           <div class="banben">
             <span>套餐</span>
@@ -113,7 +115,7 @@
             <span>标配</span>
             <span>十元快充</span>
           </div>
-          <button>加入购物车</button>
+          <button @click="addToCart">加入购物车</button>
         </div>
       </div>
       <!-- 评论 -->
@@ -179,6 +181,20 @@
 <script>
 import axios from "axios";
 import detailfooter from "../DetailFooter";
+
+// function getBan(){
+//     let banList=document.getElementsByClassName("ban__ben");
+//     console.log(3333333)
+//     for(let i=0;i<banList.length;i++){
+//         console.log(444444)
+//         banList[i].onclick=function(){
+//             console.log(banList[i].innerHTML)
+//         }
+//     }
+//     console.log(banList)
+
+// }
+
 export default {
   name: "phonedetail",
   components: {
@@ -186,15 +202,18 @@ export default {
   },
   data() {
     return {
-        writeMessageShow:false,
-        phoneList: [],
-        currentIndex: 0,
-        detailed_tab: [
-            { tab_id: "01", tab_title: "概述" },
-            { tab_id: "02", tab_title: "参数" },
-            { tab_id: "03", tab_title: "安装服务" },
-            { tab_id: "04", tab_title: "常见问题" }
-        ],
+    //   banben: "",
+    //   yanse: "",
+    //   userid:2,
+      writeMessageShow: false,
+      phoneList: [],
+      currentIndex: 0,
+      detailed_tab: [
+        { tab_id: "01", tab_title: "概述" },
+        { tab_id: "02", tab_title: "参数" },
+        { tab_id: "03", tab_title: "安装服务" },
+        { tab_id: "04", tab_title: "常见问题" }
+      ],
       detailed: [
         {
           summary_id: "01",
@@ -300,9 +319,12 @@ export default {
     };
   },
   mounted() {
+    console.log(sessionStorage.getItem("gb"));
+    sessionStorage.setItem('gb','')
+
     axios
       .get(
-        `http://192.168.61.244:8080/XiaoMi/search?code=1&id=` +
+        `http://106.53.65.198:8080/XiaoMi/search?code=1&id=` +
           this.$route.query.id
       )
       .then(res => {
@@ -313,9 +335,9 @@ export default {
         let gimg = res.data.gImg;
         let gnewprice = res.data.gewPrice;
         let num = 1;
-        let color = 3;
-        let userid = 1111111;
-        let gId = 1;
+        let color = res.data.gColor2;
+        // let userid = userid*1+1;
+        let gId = res.data.gID;
 
         let obb = {
           gname: gname,
@@ -324,7 +346,7 @@ export default {
           gimg: gimg,
           num: num,
           color: color,
-          userid: userid,
+        //   userid: userid,
           gId: gId
         };
         let str_obb = JSON.stringify(obb);
@@ -345,13 +367,46 @@ export default {
     // });
   },
   methods: {
+    test() {
+      console.log(99999999);
+      let test_gb = this.$refs.gb[0].innerText;
+      console.log(test_gb);
+      sessionStorage.setItem("gb", test_gb);
+      alert('规格已经选好，请点击加入购物车')
+    },
     goback_index() {
       this.$router.go(-1);
     },
     changeLi($index) {
       this.currentIndex = $index;
     },
-    addShopCart() {}
+    addToCart() {
+
+      console.log("car");
+      let test = sessionStorage.getItem("gb");
+      console.log(test, 111111);
+      if (test) {
+          if(sessionStorage.getItem('token')){
+            let list = sessionStorage.getItem("gotocar");
+            let car_list = JSON.parse(list);
+      axios
+        .get(
+          `http://106.53.65.198:8080/XiaoMi/insertGoods?gimg=${car_list.gimg}&gname=${car_list.gname}&gbrief=${car_list.gbrief}&gnewprice=${car_list.gnewprice}&num=${car_list.num}&gId=${car_list.gId}&gcolor=3`
+        )
+        .then(res => {
+          console.log(res.data);
+          this.$router.push("/HomePage/shoppingcar");
+        });
+          }else{
+              alert('你还没登录，请去登录');
+              this.$router.push('/login');
+          }
+      
+
+      } else {
+        alert("你需要选好规格");
+      }
+    }
   }
 };
 </script>
@@ -558,11 +613,8 @@ export default {
       .xinhao {
         span {
           display: inline-block;
-          width: 1.6rem;
-          height: 0.8rem;
-          line-height: 0.8rem;
+          padding: 2%;
           text-align: center;
-          border: 1px solid #ff6700;
           margin-left: 6%;
           margin-top: 4%;
           color: #ff6700;

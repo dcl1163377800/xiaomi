@@ -91,6 +91,8 @@
                             <p>{{goods.gContent}}</p>
                         </div>
                     </div>
+                    <div @click="test">
+
                     <div class="banben">
                         <span>版本</span>
                     </div>
@@ -99,7 +101,7 @@
                         <span>{{goods.gBan2}}</span>
                     </div>
                     <div class="banben">
-                        <span>颜色</span>
+                        <span ref="color_span">颜色</span>
                     </div>
                     <div class="xinhao">
                         <span>{{goods.gColor1}}</span>
@@ -111,7 +113,8 @@
                         <span>标配</span>
                         <span>十元快充</span>
                     </div>
-                    <button>加入购物车</button>
+                    </div>
+                    <button @click="addToCart">加入购物车</button>
             　　</div>
             </div>
              <!-- 评论 -->
@@ -167,6 +170,9 @@
 <script>
 import axios from 'axios';
 import detailfooter from './DetailFooter'
+// var user=0;
+ 
+
 export default {
     name:'goodsdetail',
     components:{
@@ -174,6 +180,7 @@ export default {
     },
     data(){
         return{
+            // uid:0,
             computerList:[],
             writeMessageShow:false,
             computerList:[],
@@ -229,20 +236,23 @@ export default {
         }
     },
     mounted() {
-        axios.get(`http://192.168.61.244:8080/XiaoMi/search?code=3&id=` + this.$route.query.id).then((res) => {
+        sessionStorage.setItem('gb','')
+        axios.get(`http://106.53.65.198:8080/XiaoMi/search?code=3&id=` + this.$route.query.id).then((res) => {
             console.log(res.data);
             this.computerList.push(res.data);
-
-
              let gname = res.data.gName;
         let gbrief = res.data.gBrief;
+        
         let gimg = res.data.gImg;
+        // let gimg = '//cdn.cnbj1.fds.api.mi-img.com/mi-mall/8d360656d8a0d98592cc0e8eea6e5825.jpg';
+        
         let gnewprice = res.data.gewPrice;
         let num = 1;
         let color = 3;
-        let userid = 1111111;
-        let gId = 1;
-        console.log(gname, gbrief, gnewprice, gimg, num, color, userid, gId);
+        // let userid;
+        let gId = res.data.gID;
+
+        console.log(gname, gbrief, gnewprice, gimg, num, color,  gId);
         let obb = {
           gname: gname,
           gbrief: gbrief,
@@ -251,7 +261,7 @@ export default {
 
           num: num,
           color: color,
-          userid: userid,
+        //   userid: userid,
           gId: gId
         };
         let str_obb=JSON.stringify(obb);
@@ -259,6 +269,52 @@ export default {
         })
     },
     methods:{
+    test() {
+      let test = sessionStorage.setItem("gb",this.$refs.color_span[0].innerText);
+
+      if (sessionStorage.getItem('gb')) {
+          alert('规格已经选好，请点击加入购物车')
+      } else {
+        alert("请选好规格");
+      }
+    },
+
+ addToCart() {
+    
+
+    //  this.uid= add(this.uid);
+
+    //  console.log(this.uid)
+    //  console.log(add(user++),4564654)
+     let list = sessionStorage.getItem("gotocar");
+      let car_list = JSON.parse(list);
+     
+      let test = sessionStorage.getItem("gb");
+      
+      if (test) {
+
+if(sessionStorage.getItem('token')){
+
+    console.log(this.uid,8888)
+        axios.get(
+          `http://106.53.65.198:8080/XiaoMi/insertGoods?gimg=${car_list.gimg}&gname=${car_list.gname}&gbrief=${car_list.gbrief}&gnewprice=${car_list.gnewprice}&num=${car_list.num}&gId=${car_list.gId}&gcolor=3`
+        )
+        .then(res => {
+          console.log(res.data);
+          this.$router.push("/HomePage/shoppingcar");
+          if(res.data.code==1){
+              alert('成功添加购物车');
+          }
+        });
+}else{
+    alert('你还没登录，请去登录')
+}
+
+      } else {
+        alert("你需要选好规格");
+      }
+    },
+    
         goback_index(){
             this.$router.go(-1);
         }
@@ -523,11 +579,8 @@ export default {
                 .xinhao{
                     span{
                         display: inline-block;
-                        width: 1.6rem;
-                        height: 0.8rem;
-                        line-height: 0.8rem;
+                        padding: 2%;
                         text-align: center;
-                        border: 1px solid #ff6700;
                         margin-left: 6%;
                         margin-top: 4%;
                         color: #ff6700;

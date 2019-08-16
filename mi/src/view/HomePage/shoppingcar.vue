@@ -5,19 +5,19 @@
             <span>购物车</span>
             <span class="iconfont icon-suosou"></span>
         </div>
-        <div class="nav" v-for="(item) in cartList" :key="item.p_id">
+        <div class="nav" v-for="(item) in cartList" :key="item.goodsId">
             <div class="checkList">
                 <input type="checkbox" @click="checkOne(item)">
             </div>
             <div class="imgList">
-                <img :src="item.p_img" alt="">
+                <img :src="item.goodsImg" alt="">
             </div>
             <div class="goodsTitle">
-                <p>{{item.p_name}}</p>
-                <span>售价：{{item.p_price}}</span>
+                <p ref="gname">{{item.goodsName}}{{item.goodsBrief}}</p>
+                <span>售价：{{item.goodsNewPrice}}</span>
                 <div class="content">
                     <button ref="dec_input" @click="decProduct(item)">-</button>
-                    <input ref="count_input" :value="item.count"/>
+                    <input ref="count_input" :value="item.goodNum"/>
                     <button @click="addProduct(item)">+</button>
                 </div>
             </div>
@@ -49,18 +49,6 @@ export default {
     data(){
         return{
             cartList:[
-                {p_id:'01',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'03',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:2},
-                {p_id:'04',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:11},
-                {p_id:'05',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'06',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'07',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'08',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'09',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'10',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'11',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'12',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
-                {p_id:'13',p_img:require('../../assets/11.jpg'),p_name:'Redemi K20 Pro 全网通版 8GB + 256GB 冰川蓝 256GB',p_price:'2999',count:1},
             ],
             count: "",
             checkList:[],
@@ -69,7 +57,7 @@ export default {
     computed: {
         itemTotal() {
             return this.cartList.reduce((pre, item) =>{
-                return pre + item.count;
+                return pre + item.goodNum;
             }, 0)
         }
     },
@@ -81,7 +69,12 @@ export default {
             this.$router.push('/account');
         },
         addProduct(item){
-            item.count++;
+            console.log('+')
+            let gname=item.goodsName;
+            item.goodNum++;
+              axios.get(`http://106.53.65.198:8080/XiaoMi/updateGoods?gname=${gname}&num=${item.goodNum}`).then(res=>{
+                    console.log(111)
+                })
             let position=this.cartList.indexOf(item);
             let dec_value=this.$refs.dec_input[position].value;
             let value=this.$refs.count_input[position].value;
@@ -89,28 +82,41 @@ export default {
                 this.$refs.dec_input[position].value='-'
             }
 
+            // axios.get(``)
+
         },
         decProduct(item){
             let position=this.cartList.indexOf(item);
             let value=this.$refs.count_input[position].value;
             let dec_value=this.$refs.dec_input[position].value;
+            let gname=item.goodsName;
+            
             if(value>1){
-                item.count--;
+                item.goodNum--;
+                axios.get(`http://106.53.65.198:8080/XiaoMi/updateGoods?gname=${gname}&num=${item.goodNum}`).then(res=>{
+                    console.log(111)
+                })
             } 
-            // if(value==1){
-            //     this.$refs.dec_input[position].value='';
-            // }
+            if(value==1){
+                this.$refs.dec_input[position].value='';
+            }
         },
 
         del(item) {
             let position = this.cartList.indexOf(item);
-            this.cartList.splice(position, 1); 
+            this.cartList.splice(position,1)
+
+            let name=item.goodsName;
+            axios.get(`http://106.53.65.198:8080/XiaoMi/deleteGoods?gname=${name}`).then(res=>{
+
+                console.log(res.data.code)
+            })
         },
         checkOne(item){
            let list= this.checkList.push(item)
            let priceList=[];          
            this.checkList.forEach(item=>{
-                let price=item.p_price*1;
+                let price=item.goodsNewPrice*1;
                 priceList.push(price);               
                 let totalPrice= priceList.reduce((oldvalue,item)=>{
                     return oldvalue+=item*1;
@@ -125,15 +131,18 @@ export default {
         
 
     },
-    mounted(){       
+    mounted(){  
+
         // if(this.$refs.count_input.value==1){
         //         this.$refs.dec_input.value=''
         //     }
         
-        // axios.get(`http://192.168.61.244:8080/XiaoMi/insertGoods?userid=${}&gname=${}&gbrief=${}&gnewprice=${}&num=${}&gId=${}&gcolor=${}`).then((res) => {
-        //     console.log(res.data);
-        //     this.songList.push(res.data);
-        // })
+        axios.get("http://106.53.65.198:8080/XiaoMi/showCart").then((res) => {
+            console.log(55555)
+            console.log(res.data);
+            // this.cartList.push(res.data);
+            this.cartList=res.data;
+        })
     },
     beforeDestroy(){
         window.sessionStorage.setItem('totalcount',this.itemTotal)

@@ -60,10 +60,11 @@ export default {
               // console.log('wy3')
               axios
                 .get(
-                  `http://192.168.61.244:8080/XiaoMi/regist?username=${username}&password=${password}&tel=${tel}`
+                  `http://106.53.65.198:8080/XiaoMi/regist?username=${username}&password=${password}&tel=${tel}`
                 )
                 .then(result => {
                   console.log(result.data);
+                  // sessionStorage.setItem('userid')
                   if(result.data.code==1){
                       if(confirm('注册成功,去登陆?')){
                           this.$router.push('/login')

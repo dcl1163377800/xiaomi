@@ -45,10 +45,13 @@ export default {
       console.log(111);
       let user_phone = this.$refs.user_input.value;
       let user_pwd=this.$refs.pwd_input.value;
-      console.log(user_phone);
+      console.log(user_phone,user_pwd);
       var phone = /^1[3456789]\d{9}$/;
+     var pwd = /[\w\d]{6,12}$/;
       if(phone.test(user_phone)){
-            axios.get(`http://192.168.61.244:8080/XiaoMi/login?tel=${user_phone}&password=${user_pwd}`).then((res)=>{
+        if(pwd.test(user_pwd)){
+             console.log(11119)
+            axios.get(`http://106.53.65.198:8080/XiaoMi/login?tel=${user_phone}&password=${user_pwd}`).then((res)=>{
                 console.log(res.data)
                 if(res.data.code==1){
                     let token=res.data.token;
@@ -65,7 +68,13 @@ export default {
                     alert('用户名或密码不正确');
                 }
             })
+        }else{
+          alert('密码格式不正确或者密码不能为空')
+        }
+       
 
+         }else{
+           alert('手机号码不能为空，或者格式不正确')
          }
     }
   }

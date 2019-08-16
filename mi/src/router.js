@@ -14,9 +14,6 @@ import PhoneDetail from './components/phone/PhoneDetail.vue'
 import DetailFooter from './components/DetailFooter';
 import Resetkey from "./components/Resetkey";
 
-import Address from "./components/Address";
-
-
 
 Vue.use(Router);
 const router=new Router({
@@ -85,10 +82,6 @@ const router=new Router({
             component:Resetkey
 
         },
-        {
-            path:"/address",
-            component:Address
-        }
     ]
 })
 export default router;
